@@ -1,0 +1,3 @@
+distribute==0.6.24
+quick2wire-api==0.0.0.2
+wsgiref==0.1.2
