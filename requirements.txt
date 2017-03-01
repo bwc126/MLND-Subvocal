@@ -1,3 +1,9 @@
-distribute==0.6.24
-quick2wire-api==0.0.0.2
-wsgiref==0.1.2
+appdirs==1.4.2
+cycler==0.10.0
+matplotlib==2.0.0
+numpy==1.12.0
+packaging==16.8
+pyparsing==2.1.10
+python-dateutil==2.6.0
+pytz==2016.10
+six==1.10.0
