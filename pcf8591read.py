@@ -12,40 +12,36 @@ address = int(sys.argv[1]) if len(sys.argv) > 1 else BASE_ADDRESS
 pin_index1 = int(sys.argv[2]) if len(sys.argv) > 2 else 0
 pin_index2 = int(sys.argv[3]) if len(sys.argv) > 3 else 1
 create_file('test.csv')
-root = Tk()
 subvocal = ''
 
 
-def key(event):
-    print(repr(event.char))
-    if repr(event.char) == 'a':
-        with I2CMaster() as i2c:
-            adc = PCF8591(i2c, THREE_DIFFERENTIAL)
-            pin1 = adc.differential_input(1)
-            #pin2 = adc.single_ended_input(pin_index2)
+with I2CMaster() as i2c:
+    adc = PCF8591(i2c, THREE_DIFFERENTIAL)
+    pin1 = adc.differential_input(1)
+    #pin2 = adc.single_ended_input(pin_index2)
+    root = Tk()
+    def key(event):
+        print(event.char)
+        if event.char == 'a':
             subvocal = 'Y'
             voltage = pin1.value * 3.3
             print("read: {} : {}".format(count, voltage))
             current = time.clock() - start
             write_file('test.csv', current, voltage, subvocal)
-    else:
-        with I2CMaster() as i2c:
-            adc = PCF8591(i2c, THREE_DIFFERENTIAL)
-            pin1 = adc.differential_input(1)
-            #pin2 = adc.single_ended_input(pin_index2)
+        else:
             subvocal = "N"
             voltage = pin1.value * 3.3
             print("read: {} : {}".format(count, voltage))
             current = time.clock() - start
             write_file('test.csv', current, voltage, subvocal)
 
-#data = {}
-start = time.clock()
+    #data = {}
+    start = time.clock()
 
-frame = Frame(root, width=300, height=300)
-frame.bind("<Key>", key)
-frame.pack()
-root.mainloop()
+    frame = Frame(root, width=300, height=300)
+    frame.bind("<Key>", key)
+    frame.pack()
+    root.mainloop()
 
 
     # count = 1
