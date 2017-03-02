@@ -11,7 +11,7 @@ from tkinter import *
 address = int(sys.argv[1]) if len(sys.argv) > 1 else BASE_ADDRESS
 pin_index1 = int(sys.argv[2]) if len(sys.argv) > 2 else 0
 pin_index2 = int(sys.argv[3]) if len(sys.argv) > 3 else 1
-create_file('test.csv')
+
 subvocal = ''
 
 
@@ -41,17 +41,19 @@ with I2CMaster() as i2c:
     # root.mainloop()
     #data = {}
     start = time.clock()
+    filename = time.asctime(time.localtime(time.time()))
+    with open(filename, 'w') as csvfile:
 
-
-
-    count = 1
-    while True:
-        voltage = pin1.value * 3.3
-        print("read: {} : {}".format(count, voltage))
-        #sleep(0.1)
-        count += 1
-        current = time.clock() - start
-
-        write_file('test', current, voltage)
-        #data[count] = pin1.raw_value
-        #volt_plot(count, data)
+        fieldnames = ['time', 'voltage']
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        writer.writeheader()
+        count = 1
+        while True:
+            voltage = pin1.value * 3.3
+            print("read: {} : {}".format(count, voltage))
+            #sleep(0.1)
+            count += 1
+            current = time.clock() - start
+            #data[count] = pin1.raw_value
+            #volt_plot(count, data)
+            writer.writerow({'time': current, 'voltage': voltage})
