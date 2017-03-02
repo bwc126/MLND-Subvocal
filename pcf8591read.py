@@ -19,39 +19,39 @@ with I2CMaster() as i2c:
     adc = PCF8591(i2c, THREE_DIFFERENTIAL)
     pin1 = adc.differential_input(1)
     #pin2 = adc.single_ended_input(pin_index2)
-    root = Tk()
-    def key(event):
-        print(event.char)
-        if event.char == 'a':
-            subvocal = 'Y'
-            voltage = pin1.value * 3.3
-            print("read: {} : {}".format(count, voltage))
-            current = time.clock() - start
-            write_file('test.csv', current, voltage, subvocal)
-        else:
-            subvocal = "N"
-            voltage = pin1.value * 3.3
-            print("read: {} : {}".format(count, voltage))
-            current = time.clock() - start
-            write_file('test.csv', current, voltage, subvocal)
+    # root = Tk()
+    # def key(event):
+    #     print(event.char)
+    #     if event.char == 'a':
+    #         subvocal = 'Y'
+    #         voltage = pin1.value * 3.3
+    #         print("read: {} : {}".format(count, voltage))
+    #         current = time.clock() - start
+    #         write_file('test.csv', current, voltage, subvocal)
+    #     else:
+    #         subvocal = "N"
+    #         voltage = pin1.value * 3.3
+    #         print("read: {} : {}".format(count, voltage))
+    #         current = time.clock() - start
+    #         write_file('test.csv', current, voltage, subvocal)
 
+    # frame = Frame(root, width=300, height=300)
+    # frame.bind("<Key>", key)
+    # frame.pack()
+    # root.mainloop()
     #data = {}
     start = time.clock()
 
-    frame = Frame(root, width=300, height=300)
-    frame.bind("<Key>", key)
-    frame.pack()
-    root.mainloop()
 
 
-    # count = 1
-    # while True:
-    #     voltage = pin1.value * 3.3
-    #     print("read: {} : {}".format(count, voltage))
-    #     #sleep(0.1)
-    #     count += 1
-    #     current = time.clock() - start
-    #
-    #     write_file('test', current, voltage, )
-    #     #data[count] = pin1.raw_value
-    #     #volt_plot(count, data)
+    count = 1
+    while True:
+        voltage = pin1.value * 3.3
+        print("read: {} : {}".format(count, voltage))
+        #sleep(0.1)
+        count += 1
+        current = time.clock() - start
+
+        write_file('test', current, voltage)
+        #data[count] = pin1.raw_value
+        #volt_plot(count, data)

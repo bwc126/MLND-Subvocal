@@ -6,8 +6,8 @@ def create_file(filename):
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
 
-def write_file(filename, time, voltage, subvocal):
+def write_file(filename, time, voltage):
     with open(filename, 'w') as csvfile:
         fieldnames = ['time', 'voltage', 'subvocal?']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-        writer.writerow({'time': time, 'voltage': voltage, 'subvocal?': subvocal})
+        writer.writerow({'time': time, 'voltage': voltage})
