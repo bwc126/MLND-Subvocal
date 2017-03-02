@@ -21,7 +21,7 @@ with I2CMaster() as i2c:
     pin1 = adc.differential_input(1)
     #pin2 = adc.single_ended_input(pin_index2)
     def key(event):
-        print(event.char)
+        print(repr(event.char))
         if repr(event.char) == 'a':
             subvocal = 'Y'
             voltage = pin1.value * 3.3
@@ -35,7 +35,6 @@ with I2CMaster() as i2c:
             current = time.clock() - start
             write_file('test.csv', current, voltage, subvocal)
 
-    count = 1
     #data = {}
     start = time.clock()
 
@@ -45,6 +44,7 @@ with I2CMaster() as i2c:
     root.mainloop()
 
 
+    # count = 1
     # while True:
     #     voltage = pin1.value * 3.3
     #     print("read: {} : {}".format(count, voltage))
