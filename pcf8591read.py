@@ -16,7 +16,7 @@ root = Tk()
 subvocal = ''
 
 def key(event):
-  if event.char == 's':
+  if event.char == 'a':
     subvocal = 'Y'
     voltage = pin1.value * 3.3
     print("read: {} : {}".format(count, voltage))
@@ -24,6 +24,10 @@ def key(event):
     write_file('test', current, voltage, subvocal)
   else:
     subvocal = "N"
+    voltage = pin1.value * 3.3
+    print("read: {} : {}".format(count, voltage))
+    current = time.clock() - start
+    write_file('test', current, voltage, subvocal)
 
 with I2CMaster() as i2c:
     adc = PCF8591(i2c, THREE_DIFFERENTIAL)
@@ -40,13 +44,13 @@ with I2CMaster() as i2c:
     root.mainloop()
 
 
-    while True:
-        voltage = pin1.value * 3.3
-        print("read: {} : {}".format(count, voltage))
-        #sleep(0.1)
-        count += 1
-        current = time.clock() - start
-
-        write_file('test', current, voltage, )
-        #data[count] = pin1.raw_value
-        #volt_plot(count, data)
+    # while True:
+    #     voltage = pin1.value * 3.3
+    #     print("read: {} : {}".format(count, voltage))
+    #     #sleep(0.1)
+    #     count += 1
+    #     current = time.clock() - start
+    #
+    #     write_file('test', current, voltage, )
+    #     #data[count] = pin1.raw_value
+    #     #volt_plot(count, data)
