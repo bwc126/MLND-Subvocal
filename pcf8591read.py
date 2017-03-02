@@ -21,7 +21,7 @@ with I2CMaster() as i2c:
     pin1 = adc.differential_input(1)
     #pin2 = adc.single_ended_input(pin_index2)
     def key(event):
-      if event.char == 'a':
+      if repr(event.char) == 'a':
         subvocal = 'Y'
         voltage = pin1.value * 3.3
         print("read: {} : {}".format(count, voltage))
@@ -38,7 +38,7 @@ with I2CMaster() as i2c:
     #data = {}
     start = time.clock()
 
-    frame = Frame(root, width=100, height=100)
+    frame = Frame(root, width=300, height=300)
     frame.bind("<Key>", key)
     frame.pack()
     root.mainloop()
