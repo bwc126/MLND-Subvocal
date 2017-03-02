@@ -87,4 +87,4 @@ def volt_plot(datafile):
     #                               interval=15, blit=True)
     plt.show()
 
-volt_plot('Thu Mar  2 20:32:59 2017')
+volt_plot('Thu Mar  2 23:04:12 2017')
