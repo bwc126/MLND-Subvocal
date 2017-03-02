@@ -11,7 +11,7 @@ from tkinter import *
 address = int(sys.argv[1]) if len(sys.argv) > 1 else BASE_ADDRESS
 pin_index1 = int(sys.argv[2]) if len(sys.argv) > 2 else 0
 pin_index2 = int(sys.argv[3]) if len(sys.argv) > 3 else 1
-create_file('test')
+create_file('test.csv')
 root = Tk()
 subvocal = ''
 
@@ -21,18 +21,19 @@ with I2CMaster() as i2c:
     pin1 = adc.differential_input(1)
     #pin2 = adc.single_ended_input(pin_index2)
     def key(event):
-      if repr(event.char) == 'a':
-        subvocal = 'Y'
-        voltage = pin1.value * 3.3
-        print("read: {} : {}".format(count, voltage))
-        current = time.clock() - start
-        write_file('test', current, voltage, subvocal)
-      else:
-        subvocal = "N"
-        voltage = pin1.value * 3.3
-        print("read: {} : {}".format(count, voltage))
-        current = time.clock() - start
-        write_file('test', current, voltage, subvocal)
+        print(event.char)
+        if repr(event.char) == 'a':
+            subvocal = 'Y'
+            voltage = pin1.value * 3.3
+            print("read: {} : {}".format(count, voltage))
+            current = time.clock() - start
+            write_file('test.csv', current, voltage, subvocal)
+        else:
+            subvocal = "N"
+            voltage = pin1.value * 3.3
+            print("read: {} : {}".format(count, voltage))
+            current = time.clock() - start
+            write_file('test.csv', current, voltage, subvocal)
 
     count = 1
     #data = {}
