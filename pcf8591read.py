@@ -15,24 +15,24 @@ create_file('test')
 root = Tk()
 subvocal = ''
 
-def key(event):
-  if event.char == 'a':
-    subvocal = 'Y'
-    voltage = pin1.value * 3.3
-    print("read: {} : {}".format(count, voltage))
-    current = time.clock() - start
-    write_file('test', current, voltage, subvocal)
-  else:
-    subvocal = "N"
-    voltage = pin1.value * 3.3
-    print("read: {} : {}".format(count, voltage))
-    current = time.clock() - start
-    write_file('test', current, voltage, subvocal)
 
 with I2CMaster() as i2c:
     adc = PCF8591(i2c, THREE_DIFFERENTIAL)
     pin1 = adc.differential_input(1)
     #pin2 = adc.single_ended_input(pin_index2)
+    def key(event):
+      if event.char == 'a':
+        subvocal = 'Y'
+        voltage = pin1.value * 3.3
+        print("read: {} : {}".format(count, voltage))
+        current = time.clock() - start
+        write_file('test', current, voltage, subvocal)
+      else:
+        subvocal = "N"
+        voltage = pin1.value * 3.3
+        print("read: {} : {}".format(count, voltage))
+        current = time.clock() - start
+        write_file('test', current, voltage, subvocal)
 
     count = 1
     #data = {}
