@@ -5,10 +5,21 @@ from time import sleep
 from quick2wire.parts.pcf8591 import *
 from quick2wire.i2c import I2CMaster
 #from vis import volt_plot
+from writefile import *
+from Tkinter import *
 
 address = int(sys.argv[1]) if len(sys.argv) > 1 else BASE_ADDRESS
 pin_index1 = int(sys.argv[2]) if len(sys.argv) > 2 else 0
 pin_index2 = int(sys.argv[3]) if len(sys.argv) > 3 else 1
+create_file('test')
+root = Tk()
+subvocal = ''
+
+def key(event):
+  if event.char = 'a':
+    subvocal = 'Y'
+  else:
+    subvocal = "N"
 
 with I2CMaster() as i2c:
     adc = PCF8591(i2c, THREE_DIFFERENTIAL)
@@ -17,9 +28,21 @@ with I2CMaster() as i2c:
 
     count = 1
     #data = {}
+    start = time.clock()
+
+    frame = Frame(root, width=100, height=100)
+    frame.bind("<Key>", key)
+    frame.pack()
+    root.mainloop()
+
+
     while True:
-        print("read: {} : {}".format(count, pin1.raw_value))
+        voltage = pin1.value * 3.3
+        print("read: {} : {}".format(count, voltage))
         #sleep(0.1)
         count += 1
+        current = time.clock() - start
+
+        write_file('test', current, voltage, )
         #data[count] = pin1.raw_value
         #volt_plot(count, data)
