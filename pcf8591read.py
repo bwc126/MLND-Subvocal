@@ -56,4 +56,4 @@ with I2CMaster() as i2c:
             current = time.clock() - start
             #data[count] = pin1.raw_value
             #volt_plot(count, data)
-            writer.writerow({'time': current, 'voltage': voltage})
+            writer.writerow({'time': count, 'voltage': voltage})
