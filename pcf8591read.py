@@ -40,6 +40,8 @@ with I2CMaster() as i2c:
     # frame.pack()
     # root.mainloop()
     #data = {}
+    count = 0
+    print("first read: {} : {}".format(count, voltage))
     start = time.clock()
     filename = time.asctime(time.localtime(time.time()))
     with open(filename, 'w') as csvfile:
@@ -53,7 +55,7 @@ with I2CMaster() as i2c:
             print("read: {} : {}".format(count, voltage))
             #sleep(0.1)
             count += 1
-            current = time.clock() - start
+            # current = time.clock() - start
             #data[count] = pin1.raw_value
             #volt_plot(count, data)
             writer.writerow({'time': count, 'voltage': voltage})
