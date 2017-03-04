@@ -72,19 +72,29 @@ def volt_plot(datafile):
     print(x[0], y[0])
     line, = ax.plot(x, y, label='voltage')
 
-
-    # def animate(i):
-    #     line.set_ydata(data[count])  # update the data
-    #     return line,
-    #
-
-    # Init only required for blitting to give a clean slate.
-    # def init():
-    #     line.set_ydata(np.ma.array(x, mask=True))
-    #     return line,
-
-    # ani = animation.FuncAnimation(fig, animate, np.arange(count-1000,count), init_func=init,
-    #                               interval=15, blit=True)
     plt.show()
 
-volt_plot('Thu Mar  2 23:04:12 2017')
+# volt_plot('Sat Mar  4 00:45:47 2017')
+
+from scipy.fftpack import rfft, irfft, fftfreq
+
+def freq_plot(datafile):
+    fig, ax = plt.subplots()
+    x, y = [], []
+    with open(datafile) as csvfile:
+        filereader = csv.reader(csvfile,delimiter=',')
+        for row in filereader:
+            x.append(row[0])
+            y.append(row[1])
+    print(x[0], y[0])
+    x, y = x[1:], y[1:]
+    print(x[0], y[0])
+    omega = fftfreq(len(y), d=int(x[1])-int(x[0]))
+    freq_signal = rfft(y)
+    plt.plot(omega, freq_signal, label='voltage')
+    plt.xlim(0.09,0.51)
+    plt.ylim(-30,30)
+
+    plt.show()
+
+freq_plot('Sat Mar  4 00:45:47 2017')

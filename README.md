@@ -24,4 +24,7 @@ Compile a list of text samples. About twenty should do.
 
 For each text sample, begin recording, wait two seconds, subvocalize slowly (at slow reading speed). Wait two seconds, then subvocalize again. Do this a totall of three times for each text sample. Wait two seconds after the last subvocalization, then stop recording for that trial.
 
-We'll then have twenty csv files, each corresponding to a text sample. Each file should have subvocal signals for three repretitions of the text sample. We might have a way of programmatically compositing these repetitions for each sample, then training a model to look for the actual text as 'labels' on the voltage data's features. 
+We'll then have twenty csv files, each corresponding to a text sample. Each file should have subvocal signals for three repretitions of the text sample. We might have a way of programmatically compositing these repetitions for each sample, then training a model to look for the actual text as 'labels' on the voltage data's features.
+
+
+Sat Mar 4 data: Consists of select samples from Jane Austen data, the same sentences found in Agile Analyst in the Austen csv file. The following numbers correspond to the sentences read to produce the Mar 4 data, in order: 1,5,6,8,10,13,17,19,20,23,26,27,28,30,31,32,33,34,40,41,42,43
