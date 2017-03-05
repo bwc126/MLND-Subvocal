@@ -74,9 +74,9 @@ def volt_plot(datafile):
 
     plt.show()
 
-# volt_plot('Sat Mar  4 00:45:47 2017')
+# volt_plot('Sat Mar  4 00:47:01 2017')
 
-from scipy.fftpack import rfft, irfft, fftfreq
+from scipy.fftpack import rfft, irfft, rfftfreq
 
 def freq_plot(datafile):
     fig, ax = plt.subplots()
@@ -89,12 +89,12 @@ def freq_plot(datafile):
     print(x[0], y[0])
     x, y = x[1:], y[1:]
     print(x[0], y[0])
-    omega = fftfreq(len(y), d=int(x[1])-int(x[0]))
+    omega = rfftfreq(len(y), d=int(x[1])-int(x[0]))
     freq_signal = rfft(y)
-    plt.plot(omega, freq_signal, label='voltage')
-    plt.xlim(0.09,0.51)
-    plt.ylim(-30,30)
+    plt.plot(omega, np.abs(freq_signal), label='voltage')
+    plt.xlim(0.001,1)
+    plt.ylim(-100,100)
 
     plt.show()
 
-freq_plot('Sat Mar  4 00:45:47 2017')
+freq_plot('Sat Mar  4 00:47:01 2017')
