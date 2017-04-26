@@ -38,3 +38,9 @@ Sat Mar 4 data: Consists of select samples from Jane Austen data, the same sente
 - The largest challenges here are finding emit_p, and determining appropriate preprocessing for our data. We will need an automated way of mapping states to observations to determine emit_p. Perhaps decision trees or neural nets would be useful here, where the state could be used as a label and the supervised learner would be trained to find observed features for this state. This model could then be used inversely to yield which features a state is likely to produce, and the probability for each.
 
 - Accuracy should be determined on a phoneme or word basis. Word basis would have a larger transition matrix, but would be much sparser. Phoneme basis would be more general but less accurate for our specific data set. In either case, word or phoneme, this must correspond with our chosen possible 'states' for Viterbi.
+
+## Update: Preparing for the Capstone
+
+I'll need to clean up this repository to prepare for the MLND Capstone. I'll need to remove all unnecessary code and documentation. Then I'll need to start describing and architecting my approach. Next will come describing and stubbing classes and methods. Then, implementation and results compilation. This step will be iterative and likely involve some bootstrapping with audio data.
+
+The approach chosen for the capstone involves finding articulatory features in the EMG data, a more specific way of looking for phonemes. I'll need to use a MLPC to pick out phonological features from EMG data corresponding to specific phonemes. This will serve as a foundation for future full development of subvocal recognition.
