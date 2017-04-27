@@ -18,18 +18,26 @@ The data is now paired between voltage data and target phonemes to train a super
 
 ## 3-2-2017
 
-Next steps: Begin recording actual subvocal test data.
-
-Compile a list of text samples. About twenty should do.
-
-For each text sample, begin recording, wait two seconds, subvocalize slowly (at slow reading speed). Wait two seconds, then subvocalize again. Do this a totall of three times for each text sample. Wait two seconds after the last subvocalization, then stop recording for that trial.
-
-We'll then have twenty csv files, each corresponding to a text sample. Each file should have subvocal signals for three repretitions of the text sample. We might have a way of programmatically compositing these repetitions for each sample, then training a model to look for the actual text as 'labels' on the voltage data's features.
-
-
 Sat Mar 4 data: Consists of select samples from Jane Austen data, the same sentences found in Agile Analyst in the Austen csv file. The following numbers correspond to the sentences read to produce the Mar 4 data, in order: 1,5,6,8,10,13,17,19,20,23,26,27,28,30,31,32,33,34,40,41,42,43
 
-## Viterbi Algorithm for Speech Recognition
+
+## Update: Preparing for the Capstone
+
+I'll need to clean up this repository to prepare for the MLND Capstone. I'll need to remove all unnecessary code and documentation. Then I'll need to start describing and architecting my approach. Next will come describing and stubbing classes and methods. Then, implementation and results compilation. This step will be iterative and likely involve some bootstrapping with audio data.
+
+The approach chosen for the capstone involves finding articulatory features in the EMG data, a more specific way of looking for phonemes. I'll need to use a MLPC to pick out phonological features from EMG data corresponding to specific phonemes. This will serve as a foundation for future full development of subvocal recognition.
+
+I'll need to discuss my chosen algorithms, and provide a description of metrics and equations (F score). I'll need to create separate clean files for functions and classes, and import into a Jupyter notebook to do development of the main project. I'll need to document every class and function I write. I'll describe my grid search for parameters and discuss the ones I choose.
+
+### Tentative Sequence:
+1. Separate EMG data into 50ms windows, run FFT + preprocessing.
+2. Label EMG data with phonemes from Austen.
+3. Decompose phonemes into phonological features.
+4. Train MLPC to identify phonological features from EMG data, or 'Articulatory Features'.
+5. Validate by reconstructing phonemes in unseen data.  
+
+
+## Deferred: Viterbi Algorithm for Speech Recognition
 
 - To use this algorithm for SVR, first we will need start_p, trans_p, emit_p. We can generate these first two on our own, directly from Austen data or elsewhere, or we can try to find an Open Source version for English. The last one, emit_p, will be determined empirically from our data set, since we already know what states generated our data.
 
@@ -38,9 +46,3 @@ Sat Mar 4 data: Consists of select samples from Jane Austen data, the same sente
 - The largest challenges here are finding emit_p, and determining appropriate preprocessing for our data. We will need an automated way of mapping states to observations to determine emit_p. Perhaps decision trees or neural nets would be useful here, where the state could be used as a label and the supervised learner would be trained to find observed features for this state. This model could then be used inversely to yield which features a state is likely to produce, and the probability for each.
 
 - Accuracy should be determined on a phoneme or word basis. Word basis would have a larger transition matrix, but would be much sparser. Phoneme basis would be more general but less accurate for our specific data set. In either case, word or phoneme, this must correspond with our chosen possible 'states' for Viterbi.
-
-## Update: Preparing for the Capstone
-
-I'll need to clean up this repository to prepare for the MLND Capstone. I'll need to remove all unnecessary code and documentation. Then I'll need to start describing and architecting my approach. Next will come describing and stubbing classes and methods. Then, implementation and results compilation. This step will be iterative and likely involve some bootstrapping with audio data.
-
-The approach chosen for the capstone involves finding articulatory features in the EMG data, a more specific way of looking for phonemes. I'll need to use a MLPC to pick out phonological features from EMG data corresponding to specific phonemes. This will serve as a foundation for future full development of subvocal recognition.
