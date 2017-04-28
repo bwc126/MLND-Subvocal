@@ -74,7 +74,7 @@ def volt_plot(datafile):
 
     plt.show()
 
-# volt_plot('Sat Mar  4 00:47:01 2017')
+volt_plot('Sat Mar  4 00:47:01 2017')
 
 from scipy.fftpack import rfft, irfft, rfftfreq
 
