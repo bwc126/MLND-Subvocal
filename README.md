@@ -29,6 +29,8 @@ The approach chosen for the capstone involves finding articulatory features in t
 
 I'll need to discuss my chosen algorithms, and provide a description of metrics and equations (F score). I'll need to create separate clean files for functions and classes, and import into a Jupyter notebook to do development of the main project. I'll need to document every class and function I write. I'll describe my grid search for parameters and discuss the ones I choose.
 
+Note: EMG data recorded at 1000 samples per second. An FFT result of 0.5 cycles per sample means 500 Hz.
+
 ### Tentative Sequence:
 1. Separate EMG data into 50ms windows, run FFT + preprocessing. (prepare_EMG.py)
 2. Label EMG data with phonemes from Austen. (prepare_outputs.py)
