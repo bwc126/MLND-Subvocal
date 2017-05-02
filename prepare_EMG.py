@@ -1,4 +1,6 @@
 # TODO: Separate EMG data into 50ms windows, run FFT + preprocessing.
+from pandas import DataFrame
+from scipy.fftpack import rfft, rfftfreq
 
 class EMG_preparer():
 
@@ -24,7 +26,8 @@ class EMG_preparer():
             a DataFrame containing FFT processed windows derived from the EMG data.
         """
         num_windows = data.shape[0] // self.samples_per_window
+        windows = DataFrame()
         for window in range(num_windows):
             first_index = window * self.samples_per_window
             last_index = first_index + self.samples_per_window
-            # TODO: Do the FFT part 
+            # TODO: Do the FFT part
