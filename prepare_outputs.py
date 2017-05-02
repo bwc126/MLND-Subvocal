@@ -20,13 +20,18 @@ class output_preparer():
         pass
 
     def transform(text):
-        # Transforms 'text', a string, into arrays of phonological features corresponding to phonemes. Returns a DataFrame of phological features and their corresponding phonemes.
+        """ Transforms 'text', a string, into arrays of phonological features corresponding to phonemes. Returns a DataFrame of phological features and their corresponding phonemes.
+        """
+        pass
 
     def zip(data, labels, auto_align=True):
-        """ Zips data and labels such that labels are applied to sequential rows of 'data' that most likely contain subvocalizations. If the data is already boolean labeled for containing subvocalization, 'auto_align' should be false to make use of those labels.
+        """ Zips data and labels such that labels are sequentially applied to serial rows of 'data' that most likely contain subvocalizations. If the data is already boolean labeled for containing subvocalization, 'auto_align' should be false to make use of those labels.
 
         Attributes:
             data: a pandas DataFrame containing rows of subsequent EMG windows.
             labels: a pandas DataFrame of phonological features and phonemes.
             auto_align: boolean. If true, indicates an automatic method is to be used in aligning each row in 'outputs' with those portions of 'data' most likely to contain actual subvocalization.
+        Returns:
+            A dataframe of labels with null values where corresponding rows in 'data' most likely do not contain subvocalization, or are labeled as such.
         """
+        pass
