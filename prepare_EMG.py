@@ -18,10 +18,10 @@ class EMG_preparer():
         self.window_size = window_size
         self.samples_per_window = sample_rate / 1000.0 * self.window_size
     def process(self, data):
-        """ process is a method for processing data into Fourier transformed windows
+        """ process is a method for processing EMG data into Fourier-transformed windows
 
         Attributes:
-            data: a pandas DataFrame containing subvocalization EMG data
+            data: a pandas DataFrame containing subvocalization EMG data and having two columns, "time", and "voltage"
         Returns:
             a DataFrame containing FFT processed windows derived from the EMG data.
         """
@@ -31,3 +31,9 @@ class EMG_preparer():
             first_index = window * self.samples_per_window
             last_index = first_index + self.samples_per_window
             # TODO: Do the FFT part
+            omega = rfftfreq(last_index - first_index, d=int(data["time"][1])-int(data["time"][0]))
+            freq_signal = rfft(data["voltage"])
+            if self.power_spectrum:
+                freq_signal = np.abs(freq_signal)
+            windows.append(zip(omega, freq_signal))
+        return windows
