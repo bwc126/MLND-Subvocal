@@ -30,10 +30,11 @@ class EMG_preparer():
         for window in range(num_windows):
             first_index = window * self.samples_per_window
             last_index = first_index + self.samples_per_window
-            # TODO: Put this in the dataframe such that each column is a frequency and each row is a distinct window. The value in a cell will be the power.
             omega = rfftfreq(last_index - first_index, d=int(data["time"][1])-int(data["time"][0]))
-            freq_signal = rfft(data["voltage"])
+            freq_signal = rfft(data["voltage"][first_index:last_index])
             if self.power_spectrum:
                 freq_signal = np.abs(freq_signal)
-            windows.append(zip(omega, freq_signal))
+            # Put the transformed EMG data in the dataframe such that each column is a frequency and each row is a distinct window. The value in a cell will be the power.
+            for freq in omega:
+                windows[window][omega] = freq_signal
         return windows
