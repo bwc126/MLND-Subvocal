@@ -1,5 +1,5 @@
 # Prepare text to become data labels. Decompose phonemes into phonological features.
-
+import nltk
 # TODO: Decide if this will try to automatically detect subvocalizations and attempt to apply phoneme labels in order. That means it needs a trained subvocalization detector. Alternately, it would need an independent source of information about whether a certain window contains a phoneme or not, and applies the labels automatically. Maybe that's done elsewhere completely.
 
 class output_preparer():
@@ -11,12 +11,17 @@ class output_preparer():
     def __init__(self, subvocal_detector=None):
         """ Initializes the output_preparer class.
         """
-        pass
+        self.detector = subvocal_detector
 
     def transform(self, text):
         """ Transforms 'text', a string, into arrays of phonological features corresponding to phonemes. Returns a DataFrame of phological features and their corresponding phonemes.
         """
-        pass
+        arpabet = nltk.corpus.cmudict.dict()
+        words = text.split(" ")
+        all_phonemes = []
+        for word in words:
+            all_phonemes += [phoneme for phoneme in arpabet[word][0]]
+
 
     def zip(self, data, labels, auto_align=True):
         """ Zips data and labels such that labels are sequentially applied to serial rows of 'data' that most likely contain subvocalizations. If the data is already boolean labeled for containing subvocalization, 'auto_align' should be false to make use of those labels.
