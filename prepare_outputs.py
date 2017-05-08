@@ -12,6 +12,9 @@ class output_preparer():
         """ Initializes the output_preparer class.
         """
         self.detector = subvocal_detector
+        if not self.detector:
+            # Train a model to detect subvocalizations 
+            pass
 
     def transform(self, text):
         """ Transforms 'text', a string, into arrays of phonological features corresponding to phonemes. Returns a DataFrame of phological features and their corresponding phonemes.
@@ -33,4 +36,7 @@ class output_preparer():
         Returns:
             A dataframe of labels with null values where corresponding rows in 'data' most likely do not contain subvocalization, or are labeled as such.
         """
+        # For row in data
+        # If row appears or is marked as containing subvocalization
+        # Apply next phoneme label to that row
         pass
