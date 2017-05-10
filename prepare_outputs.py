@@ -1,4 +1,5 @@
 # Prepare text to become data labels. Decompose phonemes into phonological features.
+from pandas import DataFrame
 import nltk
 # TODO: Decide if this will try to automatically detect subvocalizations and attempt to apply phoneme labels in order. That means it needs a trained subvocalization detector. Alternately, it would need an independent source of information about whether a certain window contains a phoneme or not, and applies the labels automatically. Maybe that's done elsewhere completely.
 
@@ -13,7 +14,7 @@ class output_preparer():
         """
         self.detector = subvocal_detector
         if not self.detector:
-            # Train a model to detect subvocalizations 
+            # Train a model to detect subvocalizations
             pass
 
     def transform(self, text):
@@ -39,4 +40,17 @@ class output_preparer():
         # For row in data
         # If row appears or is marked as containing subvocalization
         # Apply next phoneme label to that row
-        pass
+        new_labels = DataFrame
+        label_row = 0
+        null_row = 0 # TODO: rewrite this to dynamically scale to 'labels', to act as a null filler row. There might be an integrated method for this already.
+        if auto_align:
+            method = self.detector.predict()
+        else:
+            method = lambda x: x[row]['subvocalization'] == True
+        for row in data:
+            if method(data[row]):
+                new_labels[row] = labels[label_row]
+                label_row += 1
+            else:
+                new_labels[row] = null_row
+        return new_labels
