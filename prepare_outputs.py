@@ -15,17 +15,18 @@ class output_preparer():
         self.detector = subvocal_detector
         if not self.detector:
             # Train a model to detect subvocalizations
+            # Use samples from each of the files that are both certain to contain and certain to not contain subvocalizations
             pass
 
     def transform(self, text):
-        """ Transforms 'text', a string, into arrays of phonological features corresponding to phonemes. Returns a DataFrame of phological features and their corresponding phonemes.
+        """ Transforms 'text', a string, into arrays of phonological features corresponding to phonemes. Returns a DataFrame of phonological features and their corresponding phonemes.
         """
         arpabet = nltk.corpus.cmudict.dict()
         words = text.split(" ")
         all_phonemes = []
         for word in words:
             all_phonemes += [phoneme for phoneme in arpabet[word][0]]
-
+        return all_phonemes
 
     def zip(self, data, labels, auto_align=True):
         """ Zips data and labels such that labels are sequentially applied to serial rows of 'data' that most likely contain subvocalizations. If the data is already boolean labeled for containing subvocalization, 'auto_align' should be false to make use of those labels.
