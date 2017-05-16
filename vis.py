@@ -105,4 +105,4 @@ def freq_plot(datafile):
 # freq_plot('Sat Mar  4 00:45:02 2017')
 # freq_plot('Sat Mar  4 00:45:47 2017')
 # freq_plot('Sat Mar  4 00:47:01 2017')
-freq_plot('00:44:23 no sv')
+# freq_plot('00:44:23 no sv')
