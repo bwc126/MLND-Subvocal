@@ -74,7 +74,11 @@ def volt_plot(datafile):
 
     plt.show()
 
-volt_plot('Sat Mar  4 00:47:01 2017')
+# volt_plot('Sat Mar  4 00:44:23 2017')
+# volt_plot('Sat Mar  4 00:45:02 2017')
+# volt_plot('Sat Mar  4 00:45:47 2017')
+# volt_plot('Sat Mar  4 00:47:01 2017')
+
 
 from scipy.fftpack import rfft, irfft, rfftfreq
 
@@ -97,4 +101,8 @@ def freq_plot(datafile):
 
     plt.show()
 
-freq_plot('Sat Mar  4 00:47:01 2017')
+# freq_plot('Sat Mar  4 00:44:23 2017')
+# freq_plot('Sat Mar  4 00:45:02 2017')
+# freq_plot('Sat Mar  4 00:45:47 2017')
+# freq_plot('Sat Mar  4 00:47:01 2017')
+freq_plot('00:44:23 no sv')

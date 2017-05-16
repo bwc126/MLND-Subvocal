@@ -1,6 +1,7 @@
 # Prepare text to become data labels. Decompose phonemes into phonological features.
 from pandas import DataFrame
 import nltk
+from sklearn.svm import SVC
 # TODO: Decide if this will try to automatically detect subvocalizations and attempt to apply phoneme labels in order. That means it needs a trained subvocalization detector. Alternately, it would need an independent source of information about whether a certain window contains a phoneme or not, and applies the labels automatically. Maybe that's done elsewhere completely.
 
 class output_preparer():
@@ -14,6 +15,8 @@ class output_preparer():
         """
         self.detector = subvocal_detector
         if not self.detector:
+            estimator = SVC(C=0.66)
+
             # Train a model to detect subvocalizations
             # Use samples from each of the files that are both certain to contain and certain to not contain subvocalizations
             pass
