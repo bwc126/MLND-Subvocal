@@ -1,6 +1,6 @@
 # Prepare text to become data labels. Decompose phonemes into phonological features.
-from pandas import DataFrame
-import nltk
+
+import nltk, pandas, prepare_data
 from sklearn.svm import SVC
 
 class output_preparer():
@@ -14,10 +14,12 @@ class output_preparer():
         """
         self.detector = subvocal_detector
         if not self.detector:
-            estimator = SVC(C=0.66)
-
             # TODO: Train a model to detect subvocalizations
+            estimator = SVC(C=0.66)
+            data_prep = prepare_data.data_preparer()
             # Use samples from each of the files that are both certain to contain and certain to not contain subvocalizations
+            X_1, X_2 = data_prep.sv_detection()
+            
             pass
 
     def transform(self, text):
