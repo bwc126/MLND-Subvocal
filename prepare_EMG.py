@@ -25,7 +25,7 @@ class EMG_preparer():
         Returns:
             a DataFrame containing FFT processed windows derived from the EMG data.
         """
-        num_windows = data.shape[0] // self.samples_per_window
+        num_windows = int(data.shape[0]//self.samples_per_window)
         windows = DataFrame()
         for window in range(num_windows):
             first_index = window * self.samples_per_window
