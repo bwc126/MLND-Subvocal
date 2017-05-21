@@ -1,6 +1,6 @@
 # Prepare text to become data labels. Decompose phonemes into phonological features.
 
-import nltk, pandas, prepare_data
+import nltk, pandas, prepare_data, prepare_EMG
 from sklearn.svm import SVC
 
 class output_preparer():
@@ -18,8 +18,13 @@ class output_preparer():
             estimator = SVC(C=0.66)
             data_prep = prepare_data.data_preparer()
             # Use samples from each of the files that are both certain to contain and certain to not contain subvocalizations
+            EMG_Prep = prepare_EMG.EMG_preparer()
             X_1, X_2 = data_prep.sv_detection()
-            
+            # Get some select samples
+            X_1, X_2 = EMG_Prep.process(X_1), EMG_Prep.process(X_2)
+            # Process them into windows
+            # Combine those windows with 'yes' or 'no' labels for SV
+            # Train an estimator on these datapoints to identify SV signals in windows
             pass
 
     def transform(self, text):
