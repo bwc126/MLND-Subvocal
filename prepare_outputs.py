@@ -22,6 +22,15 @@ class output_preparer():
             X_1, X_2 = data_prep.sv_detection()
             # Get some select samples
             X_1, X_2 = EMG_Prep.process(X_1), EMG_Prep.process(X_2)
+            labels = DataFrame()
+            for row in X_1:
+                labels.append(0)
+            for row in X_2:
+                labels.append(1)
+
+            X = X_1.append(X_2)
+            estimator.train(X, labels)
+            print("Training Score:", estimator.score(X, labels))
             # Process them into windows
             # Combine those windows with 'yes' or 'no' labels for SV
             # Train an estimator on these datapoints to identify SV signals in windows
@@ -51,7 +60,7 @@ class output_preparer():
         # For row in data
         # If row appears or is marked as containing subvocalization
         # Apply next phoneme label to that row
-        new_labels = DataFrame
+        new_labels = DataFrame()
         label_row = 0
         null_row = 0 # TODO: rewrite this to dynamically scale to 'labels', to act as a null filler row. There might be an integrated method for this already.
         if auto_align:
