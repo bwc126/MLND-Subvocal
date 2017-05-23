@@ -2,6 +2,7 @@
 
 import nltk, pandas, prepare_data, prepare_EMG
 from sklearn.svm import SVC
+import numpy as np
 
 class output_preparer():
     """ Prepares the target data labels. Takes text, transforms it into phonemes, and then decomposes each phoneme into an array of phonological features. These arrays are returned for association with EMG data.
@@ -14,23 +15,31 @@ class output_preparer():
         """
         self.detector = subvocal_detector
         if not self.detector:
-            # TODO: Train a model to detect subvocalizations
-            estimator = SVC(C=0.66)
+            estimator = SVC(C=0.90, kernel='poly', random_state=12)
             data_prep = prepare_data.data_preparer()
             # Use samples from each of the files that are both certain to contain and certain to not contain subvocalizations
             EMG_Prep = prepare_EMG.EMG_preparer()
-            X_1, X_2 = data_prep.sv_detection()
-            # Get some select samples
-            X_1, X_2 = EMG_Prep.process(X_1), EMG_Prep.process(X_2)
-            labels = DataFrame()
-            for row in X_1:
-                labels.append(0)
-            for row in X_2:
-                labels.append(1)
+            x_1, x_2 = data_prep.sv_detection()
+            # print("sample dataframes: ",x_1,x_2)
 
+            # Get some select samples
+            X_1, X_2 = EMG_Prep.process(x_1), EMG_Prep.process(x_2)
+            print("processed sample dataframes: ",X_1,X_2)
+            labels = []
+            for row in range(X_1.shape[0]):
+                # print('lol')
+                labels.append(0)
+            # for row in X_2:
+            for row in range(X_2.shape[0]):
+                # print('wut')
+                labels.append(1)
+            # print(labels)
             X = X_1.append(X_2)
-            estimator.train(X, labels)
+            labels = pandas.DataFrame(np.ravel(labels), index=[i for i in range(len(labels))], columns=['sv'])
+            # print(labels['sv'])
+            estimator.fit(X, labels)
             print("Training Score:", estimator.score(X, labels))
+            self.detector = estimator
             # Process them into windows
             # Combine those windows with 'yes' or 'no' labels for SV
             # Train an estimator on these datapoints to identify SV signals in windows
