@@ -15,7 +15,7 @@ class output_preparer():
         """
         self.detector = subvocal_detector
         if not self.detector:
-            estimator = SVC(C=0.90, kernel='poly', random_state=12)
+            estimator = SVC(C=0.25, kernel='poly', degree=5, random_state=12)
             data_prep = prepare_data.data_preparer()
             # Use samples from each of the files that are both certain to contain and certain to not contain subvocalizations
             EMG_Prep = prepare_EMG.EMG_preparer()
@@ -24,7 +24,7 @@ class output_preparer():
 
             # Get some select samples
             X_1, X_2 = EMG_Prep.process(x_1), EMG_Prep.process(x_2)
-            print("processed sample dataframes: ",X_1,X_2)
+            # print("processed sample dataframes: ",X_1,X_2)
             labels = []
             for row in range(X_1.shape[0]):
                 # print('lol')
