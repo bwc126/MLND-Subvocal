@@ -54,6 +54,7 @@ class output_preparer():
         for word in words:
             all_phonemes += [phoneme for phoneme in arpabet[word][0]]
             # TODO: Construct arrays of phonological features for each phoneme.
+        print(all_phonemes)
         return all_phonemes
 
     def zip(self, data, labels, auto_align=True):
