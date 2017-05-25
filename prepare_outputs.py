@@ -48,13 +48,59 @@ class output_preparer():
     def transform(self, text):
         """ Transforms 'text', a string, into arrays of phonological features corresponding to phonemes. Returns a DataFrame of phonological features and their corresponding phonemes.
         """
-        arpabet = nltk.corpus.cmudict.dict()
+        self.arpabet = nltk.corpus.cmudict.dict()
+        # TODO: Use rasipuram 2016 paper's knowledge-based phoneme-to-articulatory feature map for the secondary phoneme features too. (e.g., 'ow2', 'oy2', etc.)
+        # Each phoneme has four features, one for each category: Manner, Place, Height, and Vowel. These features will be used to train feature extractors which will be combined with the MLPC to better identify phonemes from EMG data.
+        phonemes = {
+        ' ': ['silent', 'silent', 'silent', 'silent'],
+        'AA': ['vowel', 'back', 'low', 'yes'],
+        'AE': ['vowel', 'mid-front', 'low', 'yes'],
+        'AH': ['vowel', 'mid', 'mid', 'yes'],
+        'AO': ['vowel','back','mid-low','yes'],
+        'AW': ['vowel','mid-front','low','yes'],
+        'AY': ['vowel','back','low','yes'],
+        'B': ['voiced-stop','labial','max','no'],
+        'CH': ['stop','front','max','no'],
+        'D': ['voiced-stop','alveolar','max','no'],
+        'DH': ['voiced-fricative','dental','max','no'],
+        'EH': ['vowel','mid-front','mid','yes'],
+        'ER': ['vowel','mid','mid','yes'],
+        'EY': ['vowel','front','mid-high','yes'],
+        'F': ['fricative','labial','max','no'],
+        'G': ['voiced-stop','dorsal','max','no'],
+        'HH': ['aspirated','uknown','max','no'],
+        'IH': ['vowel','mid-front','high','yes'],
+        'IY': ['vowel','front','very high','yes'],
+        'JH': ['voiced-stop','front','max','no'],
+        'K': ['stop','dorsal','max','no'],
+        'L': ['approximant','lateral','very high','no'],
+        'M': ['nasal','labial','max','no'],
+        'N': ['nasal','alveolar','max','no'],
+        'NG': ['nasal','dorsal','max','no'],
+        'OW': ['vowel','back','mid','yes'],
+        'OY': ['vowel','back','mid-low','yes'],
+        'P': ['stop','labial','max','no'],
+        'R': ['approximant','retroflex','mid-low','no'],
+        'S': ['fricative','alveolar','max','no'],
+        'SH': ['fricative','front','max','no'],
+        'T': ['stop','alveolar','max','no'],
+        'TH': ['fricative','dental','max','no'],
+        'UH': ['vowel','mid-back','high','yes'],
+        'UW': ['vowel','back','very-high','yes'],
+        'V': ['voiced-fricative','labial','max','no'],
+        'W': ['approximant','back','very-high','no'],
+        'Y': ['approximant','front','very-high','no'],
+        'Z': ['voiced-fricative','alveolar','max','no'],
+        'ZH': ['voiced-fricative','front','max','no']}
+        AF = ['manner', 'place', 'height', 'vowel']
+        text = text.lower()
         words = text.split(" ")
+        words = [''.join(filter(str.isalpha, word)) for word in words]
         all_phonemes = []
         for word in words:
-            all_phonemes += [phoneme for phoneme in arpabet[word][0]]
+            all_phonemes += [phoneme for phoneme in self.arpabet[word][0]]
             # TODO: Construct arrays of phonological features for each phoneme.
-        print(all_phonemes)
+        # print(all_phonemes)
         return all_phonemes
 
     def zip(self, data, labels, auto_align=True):
