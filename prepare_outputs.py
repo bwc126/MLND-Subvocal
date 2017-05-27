@@ -10,15 +10,16 @@ class output_preparer():
     Attributes:
         subvocal_detector: Optional. An estimator trained to detect subvocalizations in EMG windows. This estimator simply returns 'True' or 'False' for whether an EMG window it's passed contains subvocalization. This is only used with the 'zip' method for the output_preparer class when that method's 'auto_align' attribute is True.
     """
-    def __init__(self, subvocal_detector=None):
+    def __init__(self, subvocal_detector=None, window_size=30.0):
         """ Initializes the output_preparer class.
         """
+        self.window_size = window_size
         self.detector = subvocal_detector
         if not self.detector:
             estimator = SVC(C=0.25, kernel='poly', degree=5, random_state=12)
             data_prep = prepare_data.data_preparer()
             # Use samples from each of the files that are both certain to contain and certain to not contain subvocalizations
-            EMG_Prep = prepare_EMG.EMG_preparer()
+            EMG_Prep = prepare_EMG.EMG_preparer(window_size=self.window_size)
             x_1, x_2 = data_prep.sv_detection()
             # print("sample dataframes: ",x_1,x_2)
 
@@ -49,8 +50,8 @@ class output_preparer():
         """ Transforms 'text', a string, into arrays of phonological features corresponding to phonemes. Returns a DataFrame of phonological features and their corresponding phonemes.
         """
         self.arpabet = nltk.corpus.cmudict.dict()
-        # TODO: Use rasipuram 2016 paper's knowledge-based phoneme-to-articulatory feature map for the secondary phoneme features too. (e.g., 'ow2', 'oy2', etc.)
-        # Each phoneme has four features, one for each category: Manner, Place, Height, and Vowel. These features will be used to train feature extractors which will be combined with the MLPC to better identify phonemes from EMG data.
+
+        # Each phoneme has four features, one for each category: Manner, Place, Height, and Vowel. These features will be used to train feature extractors which will be combined with the MLPC to better identify phonemes from EMG data. For the capstone, we're ignoring variations on these phonemes, we'll remove any numerals from the phonemes returned by nltk so they match with these phonemes. This will help control complexity of the model and system somewhat.
         phonemes = {
         ' ': ['silent', 'silent', 'silent', 'silent'],
         'AA': ['vowel', 'back', 'low', 'yes'],
@@ -93,6 +94,7 @@ class output_preparer():
         'Z': ['voiced-fricative','alveolar','max','no'],
         'ZH': ['voiced-fricative','front','max','no']}
         AF = ['manner', 'place', 'height', 'vowel']
+        pho_AF_map = pandas.DataFrame(phonemes, columns=AF)
         text = text.lower()
         words = text.split(" ")
         words = [''.join(filter(str.isalpha, word)) for word in words]
@@ -101,6 +103,10 @@ class output_preparer():
             all_phonemes += [phoneme for phoneme in self.arpabet[word][0]]
             # TODO: Construct arrays of phonological features for each phoneme.
         # print(all_phonemes)
+        for phoneme in all_phonemes:
+            pho = ''.join(filter(str.isalpha, phoneme))
+
+            print('wat', pho)
         return all_phonemes
 
     def zip(self, data, labels, auto_align=True):
