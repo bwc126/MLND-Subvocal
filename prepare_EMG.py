@@ -31,6 +31,7 @@ class EMG_preparer():
         # print (time.clock(), data['voltage'][1], data['voltage'][0])
         num_windows = int(data.shape[0]//self.samples_per_window)
         windows = DataFrame()
+        n_cols = int(self.window_size) 
         for window in range(num_windows):
             first_index = int(window * self.samples_per_window)
             last_index = int(first_index + self.samples_per_window)
@@ -40,9 +41,9 @@ class EMG_preparer():
                 freq_signal = np.abs(freq_signal)
             # Put the transformed EMG data in the dataframe such that each column is a frequency and each row is a distinct window. The value in a cell will be the power.
             # print (freq_signal, omega)
-            new_row = DataFrame(np.reshape(freq_signal, (1,50)), index=[0], columns=omega)
+            new_row = DataFrame(np.reshape(freq_signal, (1,n_cols)), index=[0], columns=omega)
             # new_row = DataFrame.from_items([(freq, om) for freq in freq_signal for om in omega])
             # print(new_row)
             windows = windows.append(new_row, ignore_index=True)
-        print (windows)
+        # print (windows)
         return windows
