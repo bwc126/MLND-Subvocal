@@ -94,7 +94,10 @@ class output_preparer():
         'Z': ['voiced-fricative','alveolar','max','no'],
         'ZH': ['voiced-fricative','front','max','no']}
         AF = ['manner', 'place', 'height', 'vowel']
-        pho_AF_map = pandas.DataFrame(phonemes, columns=AF)
+        pho_AF_map = pandas.DataFrame.from_dict(phonemes, orient='index')
+        # pho_AF_map = pandas.DataFrame(pho_AF_map, columns=AF)
+        pho_AF_map.set_axis(1, AF)
+        # print(pho_AF_map.head())
         text = text.lower()
         words = text.split(" ")
         words = [''.join(filter(str.isalpha, word)) for word in words]
@@ -103,11 +106,14 @@ class output_preparer():
             all_phonemes += [phoneme for phoneme in self.arpabet[word][0]]
             # TODO: Construct arrays of phonological features for each phoneme.
         # print(all_phonemes)
+        vector_frame = pandas.DataFrame()
         for phoneme in all_phonemes:
             pho = ''.join(filter(str.isalpha, phoneme))
+            vector_frame = vector_frame.append([pho_AF_map.loc[pho]])
+            # print(pho)
 
-            print('wat', pho)
-        return all_phonemes
+        # print (vector_frame)
+        return vector_frame
 
     def zip(self, data, labels, auto_align=True):
         """ Zips data and labels such that labels are sequentially applied to serial rows of 'data' that most likely contain subvocalizations. If the data is already boolean labeled for containing subvocalization, 'auto_align' should be false to make use of those labels.
@@ -122,17 +128,28 @@ class output_preparer():
         # For row in data
         # If row appears or is marked as containing subvocalization
         # Apply next phoneme label to that row
-        new_labels = DataFrame()
+        AF = ['manner', 'place', 'height', 'vowel']
+        new_labels = pandas.DataFrame(columns=AF)
         label_row = 0
-        null_row = 0 # TODO: rewrite this to dynamically scale to 'labels', to act as a null filler row. There might be an integrated method for this already.
+        null_row = pandas.DataFrame.from_dict({" ": ['silent', 'silent', 'silent', 'silent']}, orient='index')
+        null_row.set_axis(1,AF)
         if auto_align:
-            method = self.detector.predict()
+            method = self.detector.predict
         else:
             method = lambda x: x[row]['subvocalization'] == True
-        for row in data:
-            if method(data[row]):
-                new_labels[row] = labels[label_row]
+        for row in data.iterrows():
+            # index = int(row)
+            series = row[1]
+            # print('this is the current row number: ', series)
+            # print('this is a row of data:', series.values.reshape(1,-1))
+            if method(series.values.reshape(1,-1)):
+                print('yes')
+                if label_row >= labels.shape[0]:
+                    new_labels = new_labels.append(null_row)
+                else:
+                    new_labels = new_labels.append(labels.iloc[label_row])
                 label_row += 1
             else:
-                new_labels[row] = null_row
+                print('no')
+                new_labels = new_labels.append(null_row)
         return new_labels
