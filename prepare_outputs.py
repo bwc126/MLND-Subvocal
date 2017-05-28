@@ -115,21 +115,25 @@ class output_preparer():
         # print (vector_frame)
         return vector_frame
 
-    def zip(self, data, labels, auto_align=True):
+    def zip(self, data, labels, auto_align=True, repeat=1):
         """ Zips data and labels such that labels are sequentially applied to serial rows of 'data' that most likely contain subvocalizations. If the data is already boolean labeled for containing subvocalization, 'auto_align' should be false to make use of those labels.
 
         Attributes:
             data: a pandas DataFrame containing rows of subsequent EMG windows.
             labels: a pandas DataFrame of phonological features and phonemes.
             auto_align: boolean. If true, indicates an automatic method is to be used in aligning each row in 'outputs' with those portions of 'data' most likely to contain actual subvocalization.
+            repeat: int. Number of times the full list of labels is expected to appear within 'data'.
         Returns:
             A dataframe of labels with null values where corresponding rows in 'data' most likely do not contain subvocalization, or are labeled as such.
         """
-        # For row in data
-        # If row appears or is marked as containing subvocalization
-        # Apply next phoneme label to that row
+        # We handle repetitions of labels within data by multiplying the dataframe of labels. The whole dataframe is repeated however many times we expect the labels to appear in the data.
+        for i in range(repeat-1):
+            print('we make labels longer by one whole')
+            labels.append(labels)
+        # We prepare the new, aligned labels dataframe
         AF = ['manner', 'place', 'height', 'vowel']
         new_labels = pandas.DataFrame(columns=AF)
+        # Initially, we begin with the very first row of labels. This'll be iterated every time we find a row in the data that seems to contain subvocalization.
         label_row = 0
         null_row = pandas.DataFrame.from_dict({" ": ['silent', 'silent', 'silent', 'silent']}, orient='index')
         null_row.set_axis(1,AF)
@@ -137,16 +141,16 @@ class output_preparer():
             method = self.detector.predict
         else:
             method = lambda x: x[row]['subvocalization'] == True
+        # For row in data
         for row in data.iterrows():
-            # index = int(row)
             series = row[1]
-            # print('this is the current row number: ', series)
-            # print('this is a row of data:', series.values.reshape(1,-1))
+            # If row appears or is marked as containing subvocalization
             if method(series.values.reshape(1,-1)):
                 print('yes')
                 if label_row >= labels.shape[0]:
                     new_labels = new_labels.append(null_row)
                 else:
+                    # Apply next phoneme label to that row
                     new_labels = new_labels.append(labels.iloc[label_row])
                 label_row += 1
             else:
