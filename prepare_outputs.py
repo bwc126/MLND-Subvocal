@@ -116,7 +116,7 @@ class output_preparer():
         return vector_frame
 
     def zip(self, data, labels, auto_align=True, repeat=1):
-        """ Zips data and labels such that labels are sequentially applied to serial rows of 'data' that most likely contain subvocalizations. If the data is already boolean labeled for containing subvocalization, 'auto_align' should be false to make use of those labels.
+        """ Zips data and labels such that labels are sequentially applied to serial rows of 'data' that most likely contain subvocalizations. This is accomplished by dropping rows of 'data' that appear to lack subvocalization. If the data is already boolean labeled for containing subvocalization, 'auto_align' should be false to make use of those labels.
 
         Attributes:
             data: a pandas DataFrame containing rows of subsequent EMG windows.
@@ -124,7 +124,7 @@ class output_preparer():
             auto_align: boolean. If true, indicates an automatic method is to be used in aligning each row in 'outputs' with those portions of 'data' most likely to contain actual subvocalization.
             repeat: int. Number of times the full list of labels is expected to appear within 'data'.
         Returns:
-            A dataframe of labels with null values where corresponding rows in 'data' most likely do not contain subvocalization, or are labeled as such.
+            A dataframe of processed EMG windows that are marked as likely to contain subvocalization.
         """
         # We handle repetitions of labels within data by multiplying the dataframe of labels. The whole dataframe is repeated however many times we expect the labels to appear in the data.
         for i in range(repeat-1):
@@ -134,6 +134,7 @@ class output_preparer():
         AF = ['manner', 'place', 'height', 'vowel']
         new_labels = pandas.DataFrame(columns=AF)
         # Initially, we begin with the very first row of labels. This'll be iterated every time we find a row in the data that seems to contain subvocalization.
+        new_data = pandas.DataFrame(columns=data.axes[1])
         label_row = 0
         null_row = pandas.DataFrame.from_dict({" ": ['silent', 'silent', 'silent', 'silent']}, orient='index')
         null_row.set_axis(1,AF)
@@ -142,18 +143,36 @@ class output_preparer():
         else:
             method = lambda x: x[row]['subvocalization'] == True
         # For row in data
+        # for row in data.iterrows():
+        #     series = row[1]
+        #     # If row appears or is marked as containing subvocalization
+        #     if method(series.values.reshape(1,-1)):
+        #         print('yes')
+        #         if label_row >= labels.shape[0]:
+        #             new_labels = new_labels.append(null_row)
+        #         else:
+        #             # Apply next phoneme label to that row
+        #             new_labels = new_labels.append(labels.iloc[label_row])
+        #         label_row += 1
+        #     else:
+        #         print('no')
+        #         new_labels = new_labels.append(null_row)
+        # return new_labels
+        #
+        # Instead of taking outputs and applying null rows to most of the data, just drop all the data that doesn't appear to contain subvocalization. That should have a similar effect while reducing the null data.
         for row in data.iterrows():
             series = row[1]
+            # print('row:',row[0])
             # If row appears or is marked as containing subvocalization
             if method(series.values.reshape(1,-1)):
-                print('yes')
-                if label_row >= labels.shape[0]:
-                    new_labels = new_labels.append(null_row)
-                else:
-                    # Apply next phoneme label to that row
-                    new_labels = new_labels.append(labels.iloc[label_row])
+                # print('yes')
+                if label_row < labels.shape[0]:
+                    new_data = new_data.append(data.iloc[row[0]],ignore_index=True)
+
+                # Apply next phoneme label to that row
+                # new_data = new_data.append(labels.iloc[label_row])
                 label_row += 1
-            else:
-                print('no')
-                new_labels = new_labels.append(null_row)
-        return new_labels
+            # else:
+                # print('no')
+                # new_labels = new_labels.append(null_row)
+        return new_data
