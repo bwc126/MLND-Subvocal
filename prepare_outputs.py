@@ -100,11 +100,14 @@ class output_preparer():
         # print(pho_AF_map.head())
         text = text.lower()
         words = text.split(" ")
-        words = [''.join(filter(str.isalpha, word)) for word in words]
+        words = [str().join(filter(str.isalpha, word)) for word in words]
+        words = [word for word in words if word]
+        # print(words)
         all_phonemes = []
         for word in words:
-            all_phonemes += [phoneme for phoneme in self.arpabet[word][0]]
-            # TODO: Construct arrays of phonological features for each phoneme.
+            if word in self.arpabet:
+                all_phonemes += [phoneme for phoneme in self.arpabet[word][0]]
+
         # print(all_phonemes)
         vector_frame = pandas.DataFrame()
         for phoneme in all_phonemes:
@@ -128,7 +131,7 @@ class output_preparer():
         """
         # We handle repetitions of labels within data by multiplying the dataframe of labels. The whole dataframe is repeated however many times we expect the labels to appear in the data.
         for i in range(repeat-1):
-            print('we make labels longer by one whole')
+            # print('we make labels longer by one whole')
             labels = labels.append(labels)
         # We prepare the new, aligned labels dataframe
         AF = ['manner', 'place', 'height', 'vowel']
@@ -175,5 +178,5 @@ class output_preparer():
             # else:
                 # print('no')
                 # new_labels = new_labels.append(null_row)
-        print(labels)
+        # print(labels)
         return new_data, labels
