@@ -16,7 +16,7 @@ class output_preparer():
         self.window_size = window_size
         self.detector = subvocal_detector
         if not self.detector:
-            estimator = SVC(C=0.25, kernel='poly', degree=5, random_state=12)
+            estimator = SVC(C=0.9, kernel='poly', degree=5, random_state=12)
             data_prep = prepare_data.data_preparer()
             # Use samples from each of the files that are both certain to contain and certain to not contain subvocalizations
             EMG_Prep = prepare_EMG.EMG_preparer(window_size=self.window_size)
@@ -129,7 +129,7 @@ class output_preparer():
         # We handle repetitions of labels within data by multiplying the dataframe of labels. The whole dataframe is repeated however many times we expect the labels to appear in the data.
         for i in range(repeat-1):
             print('we make labels longer by one whole')
-            labels.append(labels)
+            labels = labels.append(labels)
         # We prepare the new, aligned labels dataframe
         AF = ['manner', 'place', 'height', 'vowel']
         new_labels = pandas.DataFrame(columns=AF)
@@ -175,4 +175,5 @@ class output_preparer():
             # else:
                 # print('no')
                 # new_labels = new_labels.append(null_row)
-        return new_data
+        print(labels)
+        return new_data, labels
