@@ -61,6 +61,7 @@ A simple example of an animated plot
 """
 def volt_plot(datafile):
     fig, ax = plt.subplots()
+    plt.title('volt plot of ' + datafile)
     x, y = [], []
     with open(datafile) as csvfile:
         filereader = csv.reader(csvfile,delimiter=',')
