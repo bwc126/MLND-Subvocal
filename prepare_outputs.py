@@ -1,6 +1,8 @@
 # Prepare text to become data labels. Decompose phonemes into phonological features.
 
 import nltk, pandas, prepare_data, prepare_EMG
+from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import ShuffleSplit
 from sklearn.svm import SVC
 import numpy as np
 
@@ -10,41 +12,37 @@ class output_preparer():
     Attributes:
         subvocal_detector: Optional. An estimator trained to detect subvocalizations in EMG windows. This estimator simply returns 'True' or 'False' for whether an EMG window it's passed contains subvocalization. This is only used with the 'zip' method for the output_preparer class when that method's 'auto_align' attribute is True.
     """
-    def __init__(self, subvocal_detector=None, window_size=30.0):
+    def __init__(self, subvocal_detector=None, window_size=30.0, do_grid_search=True):
         """ Initializes the output_preparer class.
         """
         self.window_size = window_size
         self.detector = subvocal_detector
+        self.do_grid_search = do_grid_search
         if not self.detector:
-            estimator = SVC(C=0.9, kernel='poly', degree=5, random_state=12)
-            data_prep = prepare_data.data_preparer()
-            # Use samples from each of the files that are both certain to contain and certain to not contain subvocalizations
-            EMG_Prep = prepare_EMG.EMG_preparer(window_size=self.window_size)
-            x_1, x_2 = data_prep.sv_detection()
-            # print("sample dataframes: ",x_1,x_2)
-
-            # Get some select samples
-            X_1, X_2 = EMG_Prep.process(x_1), EMG_Prep.process(x_2)
-            # print("processed sample dataframes: ",X_1,X_2)
-            labels = []
-            for row in range(X_1.shape[0]):
-                # print('lol')
-                labels.append(0)
-            # for row in X_2:
-            for row in range(X_2.shape[0]):
-                # print('wut')
-                labels.append(1)
-            # print(labels)
-            X = X_1.append(X_2)
-            labels = pandas.DataFrame(np.ravel(labels), index=[i for i in range(len(labels))], columns=['sv'])
-            # print(labels['sv'])
-            estimator.fit(X, labels)
-            print("Training Score:", estimator.score(X, labels))
-            self.detector = estimator
-            # Process them into windows
-            # Combine those windows with 'yes' or 'no' labels for SV
-            # Train an estimator on these datapoints to identify SV signals in windows
-            pass
+            if self.do_grid_search:
+                self.build_autodetector()
+            else:
+                estimator = SVC(C=0.45, kernel='rbf', random_state=12, gamma=0.45)
+                data_prep = prepare_data.data_preparer()
+                # Use samples from each of the files that are both certain to contain and certain to not contain subvocalizations
+                EMG_Prep = prepare_EMG.EMG_preparer(window_size=self.window_size)
+                x_1, x_2 = data_prep.sv_detection()
+                # Get some select samples
+                X_1, X_2 = EMG_Prep.process(x_1), EMG_Prep.process(x_2)
+                labels = []
+                for row in range(X_1.shape[0]):
+                    labels.append(0)
+                for row in range(X_2.shape[0]):
+                    labels.append(1)
+                X = X_1.append(X_2)
+                labels = pandas.DataFrame(np.ravel(labels), index=[i for i in range(len(labels))], columns=['sv'])
+                estimator.fit(X, labels)
+                print("Training Score:", estimator.score(X, labels))
+                self.detector = estimator
+                # Process them into windows
+                # Combine those windows with 'yes' or 'no' labels for SV
+                # Train an estimator on these datapoints to identify SV signals in windows
+                pass
 
     def transform(self, text):
         """ Transforms 'text', a string, into arrays of phonological features corresponding to phonemes. Returns a DataFrame of phonological features and their corresponding phonemes.
@@ -180,3 +178,36 @@ class output_preparer():
                 # new_labels = new_labels.append(null_row)
         # print(labels)
         return new_data, labels
+    def build_autodetector(self):
+        """
+        This method can perform gridsearch to find autodetector parameters.
+        """
+        estimator = SVC()
+        param_grid = {
+            'C': [0.45,0.5,0.55],
+            'kernel': ['rbf'],
+            'gamma': [0.45,0.5,0.55],
+        }
+        cv = ShuffleSplit(n_splits=3, test_size=0.15, random_state=3)
+        grid_search = GridSearchCV(SVC(), param_grid, n_jobs=-1, cv=cv)
+        data_prep = prepare_data.data_preparer()
+        # Use samples from each of the files that are both certain to contain and certain to not contain subvocalizations
+        EMG_Prep = prepare_EMG.EMG_preparer(window_size=self.window_size)
+        x_1, x_2 = data_prep.sv_detection()
+        # Get some select samples
+        X_1, X_2 = EMG_Prep.process(x_1), EMG_Prep.process(x_2)
+        labels = []
+        for row in range(X_1.shape[0]):
+            labels.append(0)
+        for row in range(X_2.shape[0]):
+            labels.append(1)
+        X = X_1.append(X_2)
+        labels = pandas.DataFrame(np.ravel(labels), index=[i for i in range(len(labels))], columns=['sv'])
+        print(X.shape,labels.shape)
+        grid_search.fit(X, labels)
+        print("Training Score:", grid_search.score(X, labels))
+        self.cv_results = grid_search.cv_results_
+        self.detector = grid_search.best_estimator_
+        # Process them into windows
+        # Combine those windows with 'yes' or 'no' labels for SV
+        # Train an estimator on these datapoints to identify SV signals in windows
