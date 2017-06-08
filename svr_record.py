@@ -23,7 +23,7 @@ def key(event):
         print ('file series will take',suffix,'as suffix in filename')
     if event.char==' ':
         filename = ''
-        r_t = threading.Thread(target=reader.run)
+        r_t = threading.Thread(target=reader.run,args=[filename])
         if reader.record == False:
             reader.record = True
             # Get the next word
