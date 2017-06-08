@@ -24,7 +24,7 @@ def key(event):
             current_word = words[current]
             # Start the recording for that word
             print(current_word)
-            filename = current_word + suffix
+            filename = current_word + str(suffix)
             reader.run(filename)
 
         # If the recording is running:
