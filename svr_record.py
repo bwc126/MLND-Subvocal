@@ -30,6 +30,8 @@ def key(event):
             filename = current_word + '-' + str(suffix)
             # reader.run(filename)
             r_t = threading.Thread(target=reader_worker, args=[filename])
+            r_t.daemon = True
+            r_t.start()
 
         # If the recording is running:
         if reader.record == True:
