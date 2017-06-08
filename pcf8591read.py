@@ -15,7 +15,7 @@ class adc_reader():
         self.address = int(sys.argv[1]) if len(sys.argv) > 1 else BASE_ADDRESS
         self.pin_index1 = int(sys.argv[2]) if len(sys.argv) > 2 else 0
         self.pin_index2 = int(sys.argv[3]) if len(sys.argv) > 3 else 1
-        self.record = False
+        self.record = True
 
 
 
