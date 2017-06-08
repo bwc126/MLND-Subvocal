@@ -11,7 +11,7 @@ words = ['dusty','march','direful','complete','superb','poised','wait','quaint',
 
 
 reader = adc_reader()
-reader_worker = reader.run
+# reader_worker = reader.run
 
 
 def key(event):
@@ -30,7 +30,7 @@ def key(event):
             print(current_word)
             filename = current_word + '-' + str(suffix)
             # reader.run(filename)
-            r_t = threading.Thread(target=reader_worker, args=(filename))
+            r_t = threading.Thread(target=reader.run, args=[filename])
             r_t.daemon = True
             r_t.start()
 
