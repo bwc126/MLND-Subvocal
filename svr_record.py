@@ -12,8 +12,7 @@ words = ['dusty','march','direful','complete','superb','poised','wait','quaint',
 
 reader = adc_reader()
 reader_worker = reader.run
-r_t = threading.Thread(target=reader_worker, args=[filename])
-r_t.daemon = True
+
 
 def key(event):
     current = 0
@@ -31,6 +30,8 @@ def key(event):
             print(current_word)
             filename = current_word + '-' + str(suffix)
             # reader.run(filename)
+            r_t = threading.Thread(target=reader_worker, args=filename)
+            r_t.daemon = True
             r_t.start()
 
         # If the recording is running:
