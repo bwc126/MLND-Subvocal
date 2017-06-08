@@ -22,6 +22,7 @@ def key(event):
         suffix = event.char
         print ('file series will take',suffix,'as suffix in filename')
     if event.char==' ':
+        r_t = threading.Thread(target=reader.run)
         if reader.record == False:
             reader.record = True
             # Get the next word
@@ -30,7 +31,7 @@ def key(event):
             print(current_word)
             filename = current_word + '-' + str(suffix)
             # reader.run(filename)
-            r_t = threading.Thread(target=reader.run, args=[filename])
+            r_t.run(args=[filename])
             r_t.daemon = True
             r_t.start()
 
