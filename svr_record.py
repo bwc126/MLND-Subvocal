@@ -25,23 +25,22 @@ def key(event):
         suffix = event.char
         print ('file series will take',suffix,'as suffix in filename')
     if event.char==' ':
-        # If the recording is running:
-        if r_t.is_alive():
-            print('terminating thread')
-            reader.record = False
-            # Stop the recording
-            current += 1
-            # Iterate the word
-        else:
-            print('starting thread')
-            reader.record = True
-            # Get the next word
-            # Start the recording for that word
-            print(current_word)
-            # reader.run(filename)
-            # r_t.run([filename])
-            r_t.daemon = True
-            r_t.start()
+        print('starting thread')
+        reader.record = True
+        # Get the next word
+        # Start the recording for that word
+        print(current_word)
+        # reader.run(filename)
+        # r_t.run([filename])
+        r_t.daemon = True
+        r_t.start()
+    # If the recording is running:
+    if event.char=='s':
+        print('terminating thread')
+        reader.record = False
+        # Stop the recording
+        current += 1
+        # Iterate the word
 
 
 
