@@ -14,6 +14,7 @@ reader = adc_reader()
 def key(event):
     current = 0
     print ("pressed", repr(event.char))
+    suffix = 0
     if event.char.isdigit():
         suffix = event.char
         print ('file series will take',suffix,'as suffix in filename')
