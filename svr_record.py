@@ -1,5 +1,6 @@
 from tkinter import *
 from pcf8591read import *
+import threading
 
 root = Tk()
 
@@ -10,6 +11,7 @@ words = ['dusty','march','direful','complete','superb','poised','wait','quaint',
 
 
 reader = adc_reader()
+reader_worker = getattr(reader, 'record')
 
 def key(event):
     current = 0
@@ -25,8 +27,9 @@ def key(event):
             current_word = words[current]
             # Start the recording for that word
             print(current_word)
-            filename = current_word + str(suffix)
-            reader.run(filename)
+            filename = current_word + '-' + str(suffix)
+            # reader.run(filename)
+            r_t = threading.Thread(target=reader_worker, args=[filename])
 
         # If the recording is running:
         if reader.record == True:
