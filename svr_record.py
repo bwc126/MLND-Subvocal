@@ -36,7 +36,7 @@ def key(event):
         r_t.start()
     # If the recording is running:
     if event.char=='s':
-        print('terminating thread')
+        print('terminating thread',current)
         reader.record = False
         # Stop the recording
         current += 1
