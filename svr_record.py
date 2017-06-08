@@ -25,6 +25,13 @@ def key(event):
         current_word = words[current]
         filename = current_word + '-' + str(suffix)
         r_t = threading.Thread(target=reader.run,args=[filename])
+        # If the recording is running:
+        if r_t.is_alive() == True:
+            print('terminating thread')
+            reader.record = False
+            # Stop the recording
+            current += 1
+            # Iterate the word
         if reader.record == False:
             print('starting thread')
             reader.record = True
@@ -36,13 +43,6 @@ def key(event):
             r_t.daemon = True
             r_t.start()
 
-        # If the recording is running:
-        if r_t.is_alive() == True:
-            print('terminating thread')
-            reader.record = False
-            # Stop the recording
-            current += 1
-            # Iterate the word
 
 
 def callback(event):
