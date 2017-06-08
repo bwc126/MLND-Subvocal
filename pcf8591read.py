@@ -19,7 +19,7 @@ class adc_reader():
 
 
 
-    def run(filename):
+    def run(self, filename):
         with I2CMaster() as i2c:
             adc = PCF8591(i2c, THREE_DIFFERENTIAL)
             pin1 = adc.differential_input(1)
@@ -56,6 +56,7 @@ class adc_reader():
                 writer.writeheader()
                 count = 1
                 while self.record:
+                    reading = ''
                     voltage = pin1.value * 3.3
                     strength = ['-' for i in range(int(pin1.value//16))]
                     reading += [bar for bar in strength]
