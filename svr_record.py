@@ -18,15 +18,15 @@ def key(event):
     current = 0
     print ("pressed", repr(event.char))
     suffix = 0
+    current_word = words[current]
+    filename = current_word + '-' + str(suffix)
+    r_t = threading.Thread(target=reader.run,args=[filename])
     if event.char.isdigit():
         suffix = event.char
         print ('file series will take',suffix,'as suffix in filename')
     if event.char==' ':
-        current_word = words[current]
-        filename = current_word + '-' + str(suffix)
-        r_t = threading.Thread(target=reader.run,args=[filename])
         # If the recording is running:
-        if r_t.is_alive() == True:
+        if r_t.is_alive():
             print('terminating thread')
             reader.record = False
             # Stop the recording
