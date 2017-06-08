@@ -31,7 +31,7 @@ def key(event):
             print(current_word)
             filename = current_word + '-' + str(suffix)
             # reader.run(filename)
-            r_t.run(args=[filename])
+            r_t.run([filename])
             r_t.daemon = True
             r_t.start()
 
