@@ -31,11 +31,11 @@ class adc_reader():
                 fieldnames = ['time', 'count', 'voltage']
                 writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
                 writer.writeheader()
-                count = 1
+
                 while self.record:
                     reading = ''
                     voltage = pin1.value * 3.3
-                    strength = ['-' for i in range(int(pin1.value//4))]
+                    strength = ['-' for i in range(int(pin1.value//2))]
                     print (strength)
                     #sleep(0.1)
                     count += 1
