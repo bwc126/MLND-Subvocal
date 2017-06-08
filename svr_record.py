@@ -35,7 +35,7 @@ def key(event):
             r_t.start()
 
         # If the recording is running:
-        if r_t.isAlive():
+        if r_t.is_alive() == True:
             reader.record = False
             # Stop the recording
             current += 1
