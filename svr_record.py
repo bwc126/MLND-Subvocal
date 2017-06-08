@@ -20,7 +20,7 @@ def key(event):
         print ('file series will take',suffix,'as suffix in filename')
     if event.char==' ':
         if reader.record == False:
-            reader.record == True
+            reader.record = True
             # Get the next word
             current_word = words[current]
             # Start the recording for that word
