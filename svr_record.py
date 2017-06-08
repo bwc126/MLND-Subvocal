@@ -22,15 +22,14 @@ def key(event):
         suffix = event.char
         print ('file series will take',suffix,'as suffix in filename')
     if event.char==' ':
-        filename = ''
+        current_word = words[current]
+        filename = current_word + '-' + str(suffix)
         r_t = threading.Thread(target=reader.run,args=[filename])
         if reader.record == False:
             reader.record = True
             # Get the next word
-            current_word = words[current]
             # Start the recording for that word
             print(current_word)
-            filename = current_word + '-' + str(suffix)
             # reader.run(filename)
             # r_t.run([filename])
             r_t.daemon = True
