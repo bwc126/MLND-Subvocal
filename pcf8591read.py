@@ -10,7 +10,7 @@ from tkinter import *
 
 class adc_reader():
 
-    def __init__():
+    def __init__(self):
 
         self.address = int(sys.argv[1]) if len(sys.argv) > 1 else BASE_ADDRESS
         self.pin_index1 = int(sys.argv[2]) if len(sys.argv) > 2 else 0
