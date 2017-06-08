@@ -58,7 +58,7 @@ class adc_reader():
                 while self.record:
                     reading = ''
                     voltage = pin1.value * 3.3
-                    strength = ['-' for i in range(int(pin1.value//16))]
+                    strength = ['-' for i in range(int(pin1.value//4))]
                     print (strength)
                     #sleep(0.1)
                     count += 1
@@ -66,3 +66,4 @@ class adc_reader():
                     #data[count] = pin1.raw_value
                     #volt_plot(count, data)
                     writer.writerow({'time': current, 'count': count, 'voltage': voltage})
+                break
