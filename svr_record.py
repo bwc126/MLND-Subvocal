@@ -11,7 +11,7 @@ words = ['dusty','march','direful','complete','superb','poised','wait','quaint',
 
 
 reader = adc_reader()
-reader_worker = getattr(reader, 'record')
+reader_worker = reader.run
 
 def key(event):
     current = 0
