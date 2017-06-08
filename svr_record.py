@@ -32,7 +32,7 @@ def key(event):
             # Stop the recording
             current += 1
             # Iterate the word
-        elif reader.record == False:
+        else:
             print('starting thread')
             reader.record = True
             # Get the next word
