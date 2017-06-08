@@ -67,4 +67,4 @@ class adc_reader():
                     #data[count] = pin1.raw_value
                     #volt_plot(count, data)
                     writer.writerow({'time': current, 'count': count, 'voltage': voltage})
-            current += 1
+            
