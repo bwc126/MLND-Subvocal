@@ -30,7 +30,7 @@ def key(event):
             print(current_word)
             filename = current_word + '-' + str(suffix)
             # reader.run(filename)
-            r_t = threading.Thread(target=reader_worker, args=filename)
+            r_t = threading.Thread(target=reader_worker, args=(filename))
             r_t.daemon = True
             r_t.start()
 
