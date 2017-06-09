@@ -21,7 +21,7 @@ class svr_interface():
         def key(event):
             print ("pressed", repr(event.char))
             suffix = 0
-            current_word = words[self.current]
+            current_word = self.words[self.current]
             filename = current_word + '-' + str(suffix)
             self.r_t = threading.Thread(target=self.reader.run,args=[filename])
             if event.char.isdigit():
