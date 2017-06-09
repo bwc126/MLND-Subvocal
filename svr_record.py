@@ -29,7 +29,7 @@ class svr_interface():
                 print ('file series will take',suffix,'as suffix in filename')
             if event.char==' ':
                 print('starting thread')
-                reader.record = True
+                self.reader.record = True
                 # Get the next word
                 # Start the recording for that word
                 print(current_word)
@@ -40,7 +40,7 @@ class svr_interface():
             # If the recording is running:
             if event.char=='s':
                 print('terminating thread',current)
-                reader.record = False
+                self.reader.record = False
                 # Stop the recording
                 self.current += 1
                 # Iterate the word
