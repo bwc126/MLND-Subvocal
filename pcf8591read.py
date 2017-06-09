@@ -38,7 +38,8 @@ class adc_reader():
                     voltage = pin1.value * 3.3
                     strength = ['-' for i in range(int(pin1.value*32))]
                     disp = ''
-                    disp += str([dash for dash in strength])
+                    for dash in strength:
+                        disp += dash
                     print (disp)
                     #sleep(0.1)
                     count += 1
