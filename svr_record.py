@@ -40,7 +40,7 @@ class svr_interface():
                 self.r_t.start()
             # If the recording is running:
             if event.char=='s':
-                # self.r_t._target.record = False
+                self.reader.record = False
                 # Stop the recording
                 self.current += 1
                 print('terminating thread',self.current)
