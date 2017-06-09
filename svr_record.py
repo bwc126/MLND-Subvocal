@@ -44,6 +44,7 @@ class svr_interface():
                 # Stop the recording
                 self.current += 1
                 print('terminating thread',self.current)
+                print('r_t:',vars(r_t))
 
                 # Iterate the word
 
