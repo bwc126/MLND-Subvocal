@@ -24,7 +24,7 @@ class adc_reader():
             adc = PCF8591(i2c, THREE_DIFFERENTIAL)
             pin1 = adc.differential_input(1)
             count = 0
-            start = time.process_time()
+            start = time.time()
 
             with open(filename, 'w') as csvfile:
 
@@ -42,7 +42,7 @@ class adc_reader():
                     print (disp)
                     #sleep(0.1)
                     count += 1
-                    current = time.process_time() - start
+                    current = time.time() - start
                     #data[count] = pin1.raw_value
                     #volt_plot(count, data)
                     writer.writerow({'time': current, 'count': count, 'voltage': voltage})
