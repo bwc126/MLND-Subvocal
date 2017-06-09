@@ -36,8 +36,9 @@ class adc_reader():
                 while self.record:
                     reading = ''
                     voltage = pin1.value * 3.3
-                    strength = ['-' for i in range(int(pin1.value*256//4))]
-                    print (strength)
+                    strength = ['-' for i in range(int(pin1.value*32))]
+                    disp += str([dash for dash in strength])
+                    print (disp)
                     #sleep(0.1)
                     count += 1
                     current = time.clock() - start
