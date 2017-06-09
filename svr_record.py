@@ -43,7 +43,6 @@ class svr_interface():
                 self.reader.record = False
                 # Stop the recording
                 self.current += 1
-                self.r_t.exit()
                 print('terminating thread',self.current)
 
                 # Iterate the word
