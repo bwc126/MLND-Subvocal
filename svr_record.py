@@ -40,11 +40,11 @@ class svr_interface():
                 self.r_t.start()
             # If the recording is running:
             if event.char=='s':
-                self.reader.record = False
+                # self.r_t._target.record = False
                 # Stop the recording
                 self.current += 1
                 print('terminating thread',self.current)
-                print('r_t:',vars(self.r_t))
+                print('r_t:',vars(self.r_t),'r_t._target:',vars(self.r_t._target))
 
                 # Iterate the word
 
