@@ -1,7 +1,6 @@
 #! /usr/bin/env python3
 
 import sys, time
-from time import sleep
 from quick2wire.parts.pcf8591 import *
 from quick2wire.i2c import I2CMaster
 #from vis import volt_plot
@@ -25,7 +24,7 @@ class adc_reader():
             adc = PCF8591(i2c, THREE_DIFFERENTIAL)
             pin1 = adc.differential_input(1)
             count = 0
-            start = time.clock()
+            start = time.process_time()
 
             with open(filename, 'w') as csvfile:
 
@@ -43,7 +42,7 @@ class adc_reader():
                     print (disp)
                     #sleep(0.1)
                     count += 1
-                    current = time.clock() - start
+                    current = time.process_time() - start
                     #data[count] = pin1.raw_value
                     #volt_plot(count, data)
                     writer.writerow({'time': current, 'count': count, 'voltage': voltage})
