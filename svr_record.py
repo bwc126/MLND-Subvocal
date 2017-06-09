@@ -21,6 +21,7 @@ class svr_interface():
         self.filename = self.current_word + '-' + str(self.suffix)
         self.r_t = threading.Thread(target=self.reader.run,args=[self.filename])
         self.r_t.daemon = True
+        self.r_t.start()
 
         def key(event):
             print ("pressed", repr(event.char))
@@ -37,7 +38,6 @@ class svr_interface():
                 # Start the recording for that word
                 # reader.run(filename)
                 # r_t.run([filename])
-                # self.r_t.start()
             # If the recording is running:
             if event.char=='s':
                 self.reader.record = False
