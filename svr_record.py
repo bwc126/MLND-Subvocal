@@ -14,8 +14,8 @@ reader = adc_reader()
 # reader_worker = reader.run
 
 
+current = 0
 def key(event):
-    current = 0
     print ("pressed", repr(event.char))
     suffix = 0
     current_word = words[current]
