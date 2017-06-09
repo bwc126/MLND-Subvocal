@@ -20,6 +20,7 @@ class adc_reader():
 
 
     def run(self, filename):
+        
         with I2CMaster() as i2c:
             adc = PCF8591(i2c, THREE_DIFFERENTIAL)
             pin1 = adc.differential_input(1)
