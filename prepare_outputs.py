@@ -12,13 +12,13 @@ class output_preparer():
     Attributes:
         subvocal_detector: Optional. An estimator trained to detect subvocalizations in EMG windows. This estimator simply returns 'True' or 'False' for whether an EMG window it's passed contains subvocalization. This is only used with the 'zip' method for the output_preparer class when that method's 'auto_align' attribute is True.
     """
-    def __init__(self, subvocal_detector=None, window_size=30.0, do_grid_search=True):
+    def __init__(self, subvocal_detector=None, window_size=30.0, do_grid_search=False, use_auto=False):
         """ Initializes the output_preparer class.
         """
         self.window_size = window_size
         self.detector = subvocal_detector
         self.do_grid_search = do_grid_search
-        if not self.detector:
+        if use_auto and not self.detector:
             if self.do_grid_search:
                 self.build_autodetector()
             else:
@@ -67,7 +67,7 @@ class output_preparer():
         'EY': ['vowel','front','mid-high','yes'],
         'F': ['fricative','labial','max','no'],
         'G': ['voiced-stop','dorsal','max','no'],
-        'HH': ['aspirated','uknown','max','no'],
+        'HH': ['aspirated','unknown','max','no'],
         'IH': ['vowel','mid-front','high','yes'],
         'IY': ['vowel','front','very high','yes'],
         'JH': ['voiced-stop','front','max','no'],
