@@ -20,7 +20,7 @@ class EMG_preparer():
         self.window_size = window_size
         self.samples_per_window = sample_rate / 1000.0 * self.window_size
         self.power_spectrum = power_spectrum
-    def process(self, data, num_phonemes=None):
+    def process(self, data, num_phonemes=None, wavelets=False):
         """ process is a method for processing EMG data into Fourier-transformed windows
 
         Attributes:
@@ -37,6 +37,21 @@ class EMG_preparer():
         else:
             num_windows = int(data.shape[0]//self.samples_per_window)
 
+        if wavelets:
+            # Go through each row from first index to last for each window
+            # Sum up the amplitudes in each column
+            # Return all the windows
+            windows = DataFrame()
+            # n_cols = int(self.window_size)
+            for window in range(num_windows):
+                first_index = int(window * self.samples_per_window)
+                last_index = int(first_index + self.samples_per_window)
+                data_window = DataFrame(data.iloc[first_index:last_index])
+                # print(data_window.head())
+                new_row = data_window.abs().sum(axis=0)
+                windows = windows.append(new_row, ignore_index = True)
+                # TODO: Sum up the amplitudes for each column
+            return windows
         windows = DataFrame()
         # n_cols = int(self.window_size)
         for window in range(num_windows):
