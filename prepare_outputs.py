@@ -67,7 +67,7 @@ class output_preparer():
         'EY': ['vowel','front','mid-high','yes'],
         'F': ['fricative','labial','max','no'],
         'G': ['voiced-stop','dorsal','max','no'],
-        'HH': ['aspirated','uknown','max','no'],
+        'HH': ['aspirated','unknown','max','no'],
         'IH': ['vowel','mid-front','high','yes'],
         'IY': ['vowel','front','very high','yes'],
         'JH': ['voiced-stop','front','max','no'],
