@@ -1,35 +1,4 @@
-# """
-# ===========
-# Random data
-# ===========
-#
-# An animation of random data.
-#
-# """
-#
-# import numpy as np
-# import matplotlib.pyplot as plt
-# import matplotlib.animation as animation
-#
-# fig, ax = plt.subplots()
-# line, = ax.plot(np.random.rand(256))
-# ax.set_ylim(0, 1)
-#
-#
-# def update(data):
-#     line.set_ydata(data)
-#     return line,
-#
-#
-# def data_gen():
-#     while True:
-#         yield np.random.rand(256)
-#
-# ani = animation.FuncAnimation(fig, update, data_gen, interval=100)
-# plt.show()
-"""
-A simple example of an animated plot
-"""
+# Used to test animations, generate some EMG graphs in final report.
 import csv
 import numpy as np
 import matplotlib.pyplot as plt
@@ -56,9 +25,7 @@ def test_plot():
                                   interval=25, blit=True)
     plt.show()
 
-"""
-A simple example of an animated plot
-"""
+
 def volt_plot(datafile):
     fig, ax = plt.subplots()
     plt.title('volt plot of ' + datafile)
@@ -67,18 +34,20 @@ def volt_plot(datafile):
         filereader = csv.reader(csvfile,delimiter=',')
         for row in filereader:
             x.append(row[0])
-            y.append(row[1])
+            y.append(row[2])
     print(x[0], y[0])
     x, y = x[1:], y[1:]
     print(x[0], y[0])
     line, = ax.plot(x, y, label='voltage')
+    plt.xlabel('Time (seconds)')
+    plt.ylabel('Voltage (volts)')
 
     plt.show()
 
-# volt_plot('Sat Mar  4 00:44:23 2017')
-# volt_plot('Sat Mar  4 00:45:02 2017')
-# volt_plot('Sat Mar  4 00:45:47 2017')
-# volt_plot('Sat Mar  4 00:47:01 2017')
+volt_plot('simple-svr-data/advice-2')
+volt_plot('simple-svr-data/advice-3')
+volt_plot('simple-svr-data/aspiring-1')
+volt_plot('simple-svr-data/amuck-2')
 
 
 from scipy.fftpack import rfft, irfft, rfftfreq
