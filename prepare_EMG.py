@@ -48,7 +48,7 @@ class EMG_preparer():
                 last_index = int(first_index + self.samples_per_window)
                 data_window = DataFrame(data.iloc[first_index:last_index])
                 # print(data_window.head())
-                new_row = data_window.abs().sum(axis=0)
+                new_row = data_window.abs().pow(2).sum(axis=0)
                 windows = windows.append(new_row, ignore_index = True)
                 # TODO: Sum up the amplitudes for each column
             return windows
