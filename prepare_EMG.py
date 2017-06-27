@@ -52,21 +52,21 @@ class EMG_preparer():
                 windows = windows.append(new_row, ignore_index = True)
                 # TODO: Sum up the amplitudes for each column
             return windows
-        windows = DataFrame()
+        # windows = DataFrame()
         # n_cols = int(self.window_size)
-        for window in range(num_windows):
-            first_index = int(window * self.samples_per_window)
-            last_index = int(first_index + self.samples_per_window)
-            omega = rfftfreq(100, d=.001)
-            # print(omega)
-            freq_signal = rfft(data["voltage"][first_index:last_index], n=100)
-            if self.power_spectrum:
-                freq_signal = np.abs(freq_signal)
-            # Put the transformed EMG data in the dataframe such that each column is a frequency and each row is a distinct window. The value in a cell will be the power.
-            # print (freq_signal, omega)
-            new_row = DataFrame(np.reshape(freq_signal, (1,-1)), index=[0], columns=omega)
-            # new_row = DataFrame.from_items([(freq, om) for freq in freq_signal for om in omega])
-            # print(new_row)
-            windows = windows.append(new_row, ignore_index=True)
-        # print (windows)
-        return windows
+        # for window in range(num_windows):
+        #     first_index = int(window * self.samples_per_window)
+        #     last_index = int(first_index + self.samples_per_window)
+        #     omega = rfftfreq(100, d=.001)
+        #     # print(omega)
+        #     freq_signal = rfft(data["voltage"][first_index:last_index], n=100)
+        #     if self.power_spectrum:
+        #         freq_signal = np.abs(freq_signal)
+        #     # Put the transformed EMG data in the dataframe such that each column is a frequency and each row is a distinct window. The value in a cell will be the power.
+        #     # print (freq_signal, omega)
+        #     new_row = DataFrame(np.reshape(freq_signal, (1,-1)), index=[0], columns=omega)
+        #     # new_row = DataFrame.from_items([(freq, om) for freq in freq_signal for om in omega])
+        #     # print(new_row)
+        #     windows = windows.append(new_row, ignore_index=True)
+        # # print (windows)
+        # return windows
