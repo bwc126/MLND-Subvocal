@@ -26,18 +26,15 @@ A unique csv file was produced for each sub-vocalization trial. A sub-vocalizati
 2. Load 'Subvocal.ipynb' in jupyter notebook.
 3. Run through the workflow to see progression of EMG -> MUAP Info -> AF's -> Phonemes.
 
-
-
-
-
-
-
-
-
-
-
-
-
-## 3-2-2017
-
-Sat Mar 4 data: Consists of select samples from Jane Austen data, the same sentences found in Agile Analyst in the Austen csv file. The following numbers correspond to the sentences read to produce the Mar 4 data, in order: 1,5,6,8,10,13,17,19,20,23,26,27,28,30,31,32,33,34,40,41,42,43
+### Files in this Repo:
++ Folder 'old-svr-data' contains the old, complex datasets that weren't used in the final version.
++ Folder 'simple-svr-data' contains the simpler one word-per-file data that was used to train the solution model.
++ pcf8591read.py is for having an r-pi and q2w ADC read EMG data, it was used to gather EMG data.
++ prepare_data.py is used to load data files as dataframes for the project.
++ prepare_EMG.py is used to help process EMG data into useful info.
++ prepare_outputs.py is used to transform words into phonemes and articulatory feature vectors.
++ simple SVR words.py is a simple file containing the list of words used to generate the simple-svr-data.
++ simple-svr.py is a script used on the r-pi to help manage the recording process.
++ Subvocal.ipynb is the main development notebook used throughout the project development.
++ vis.py was used to help generate graphs used in the capstone report.
++ wavelet_exp.py is just holding onto some code used to generate neat CWT graphs of the EMG data. 
