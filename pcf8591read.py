@@ -1,5 +1,7 @@
 #! /usr/bin/env python3
-
+"""
+This file is for gathering EMG data using the Q2W I2C PCF8591 ADC Breakout Board with a Raspberry PI. It's best used in conjunction with a script to control recording flow. See "simple_svr.py" for the actual control flow used. 
+"""
 import sys, time
 from quick2wire.parts.pcf8591 import *
 from quick2wire.i2c import I2CMaster
