@@ -1,0 +1,765 @@
+
+%% bare_conf.tex
+%% V1.4b
+%% 2015/08/26
+%% by Michael Shell
+%% See:
+%% http://www.michaelshell.org/
+%% for current contact information.
+%%
+%% This is a skeleton file demonstrating the use of IEEEtran.cls
+%% (requires IEEEtran.cls version 1.8b or later) with an IEEE
+%% conference paper.
+%%
+%% Support sites:
+%% http://www.michaelshell.org/tex/ieeetran/
+%% http://www.ctan.org/pkg/ieeetran
+%% and
+%% http://www.ieee.org/
+
+%%*************************************************************************
+%% Legal Notice:
+%% This code is offered as-is without any warranty either expressed or
+%% implied; without even the implied warranty of MERCHANTABILITY or
+%% FITNESS FOR A PARTICULAR PURPOSE!
+%% User assumes all risk.
+%% In no event shall the IEEE or any contributor to this code be liable for
+%% any damages or losses, including, but not limited to, incidental,
+%% consequential, or any other damages, resulting from the use or misuse
+%% of any information contained here.
+%%
+%% All comments are the opinions of their respective authors and are not
+%% necessarily endorsed by the IEEE.
+%%
+%% This work is distributed under the LaTeX Project Public License (LPPL)
+%% ( http://www.latex-project.org/ ) version 1.3, and may be freely used,
+%% distributed and modified. A copy of the LPPL, version 1.3, is included
+%% in the base LaTeX documentation of all distributions of LaTeX released
+%% 2003/12/01 or later.
+%% Retain all contribution notices and credits.
+%% ** Modified files should be clearly indicated as such, including  **
+%% ** renaming them and changing author support contact information. **
+%%*************************************************************************
+
+
+% *** Authors should verify (and, if needed, correct) their LaTeX system  ***
+% *** with the testflow diagnostic prior to trusting their LaTeX platform ***
+% *** with production work. The IEEE's font choices and paper sizes can   ***
+% *** trigger bugs that do not appear when using other class files.       ***                          ***
+% The testflow support page is at:
+% http://www.michaelshell.org/tex/testflow/
+
+
+
+\documentclass[conference]{IEEEtran}
+% Some Computer Society conferences also require the compsoc mode option,
+% but others use the standard conference format.
+%
+% If IEEEtran.cls has not been installed into the LaTeX system files,
+% manually specify the path to it like:
+% \documentclass[conference]{../sty/IEEEtran}
+
+
+
+
+
+% Some very useful LaTeX packages include:
+% (uncomment the ones you want to load)
+
+
+% *** MISC UTILITY PACKAGES ***
+%
+%\usepackage{ifpdf}
+% Heiko Oberdiek's ifpdf.sty is very useful if you need conditional
+% compilation based on whether the output is pdf or dvi.
+% usage:
+% \ifpdf
+%   % pdf code
+% \else
+%   % dvi code
+% \fi
+% The latest version of ifpdf.sty can be obtained from:
+% http://www.ctan.org/pkg/ifpdf
+% Also, note that IEEEtran.cls V1.7 and later provides a builtin
+% \ifCLASSINFOpdf conditional that works the same way.
+% When switching from latex to pdflatex and vice-versa, the compiler may
+% have to be run twice to clear warning/error messages.
+
+
+
+
+
+
+% *** CITATION PACKAGES ***
+%
+\usepackage{cite}
+% cite.sty was written by Donald Arseneau
+% V1.6 and later of IEEEtran pre-defines the format of the cite.sty package
+% \cite{} output to follow that of the IEEE. Loading the cite package will
+% result in citation numbers being automatically sorted and properly
+% "compressed/ranged". e.g., [1], [9], [2], [7], [5], [6] without using
+% cite.sty will become [1], [2], [5]--[7], [9] using cite.sty. cite.sty's
+% \cite will automatically add leading space, if needed. Use cite.sty's
+% noadjust option (cite.sty V3.8 and later) if you want to turn this off
+% such as if a citation ever needs to be enclosed in parenthesis.
+% cite.sty is already installed on most LaTeX systems. Be sure and use
+% version 5.0 (2009-03-20) and later if using hyperref.sty.
+% The latest version can be obtained at:
+% http://www.ctan.org/pkg/cite
+% The documentation is contained in the cite.sty file itself.
+
+
+
+
+
+
+% *** GRAPHICS RELATED PACKAGES ***
+%
+\ifCLASSINFOpdf
+   \usepackage[pdftex]{graphicx}
+  % declare the path(s) where your graphic files are
+   \graphicspath{{../pdf/}{../jpeg/}}
+  % and their extensions so you won't have to specify these with
+  % every instance of \includegraphics
+   \DeclareGraphicsExtensions{.pdf,.jpeg,.png}
+\else
+  % or other class option (dvipsone, dvipdf, if not using dvips). graphicx
+  % will default to the driver specified in the system graphics.cfg if no
+  % driver is specified.
+   \usepackage[dvips]{graphicx}
+  % declare the path(s) where your graphic files are
+  %  \graphicspath{{../eps/}}
+   \graphicspath{{img/}}
+  % and their extensions so you won't have to specify these with
+  % every instance of \includegraphics
+   \DeclareGraphicsExtensions{.png,.eps}
+\fi
+% graphicx was written by David Carlisle and Sebastian Rahtz. It is
+% required if you want graphics, photos, etc. graphicx.sty is already
+% installed on most LaTeX systems. The latest version and documentation
+% can be obtained at:
+% http://www.ctan.org/pkg/graphicx
+% Another good source of documentation is "Using Imported Graphics in
+% LaTeX2e" by Keith Reckdahl which can be found at:
+% http://www.ctan.org/pkg/epslatex
+%
+% latex, and pdflatex in dvi mode, support graphics in encapsulated
+% postscript (.eps) format. pdflatex in pdf mode supports graphics
+% in .pdf, .jpeg, .png and .mps (metapost) formats. Users should ensure
+% that all non-photo figures use a vector format (.eps, .pdf, .mps) and
+% not a bitmapped formats (.jpeg, .png). The IEEE frowns on bitmapped formats
+% which can result in "jaggedy"/blurry rendering of lines and letters as
+% well as large increases in file sizes.
+%
+% You can find documentation about the pdfTeX application at:
+% http://www.tug.org/applications/pdftex
+
+
+
+
+
+% *** MATH PACKAGES ***
+%
+%\usepackage{amsmath}
+% A popular package from the American Mathematical Society that provides
+% many useful and powerful commands for dealing with mathematics.
+%
+% Note that the amsmath package sets \interdisplaylinepenalty to 10000
+% thus preventing page breaks from occurring within multiline equations. Use:
+%\interdisplaylinepenalty=2500
+% after loading amsmath to restore such page breaks as IEEEtran.cls normally
+% does. amsmath.sty is already installed on most LaTeX systems. The latest
+% version and documentation can be obtained at:
+% http://www.ctan.org/pkg/amsmath
+
+
+
+
+
+% *** SPECIALIZED LIST PACKAGES ***
+%
+%\usepackage{algorithmic}
+% algorithmic.sty was written by Peter Williams and Rogerio Brito.
+% This package provides an algorithmic environment fo describing algorithms.
+% You can use the algorithmic environment in-text or within a figure
+% environment to provide for a floating algorithm. Do NOT use the algorithm
+% floating environment provided by algorithm.sty (by the same authors) or
+% algorithm2e.sty (by Christophe Fiorio) as the IEEE does not use dedicated
+% algorithm float types and packages that provide these will not provide
+% correct IEEE style captions. The latest version and documentation of
+% algorithmic.sty can be obtained at:
+% http://www.ctan.org/pkg/algorithms
+% Also of interest may be the (relatively newer and more customizable)
+% algorithmicx.sty package by Szasz Janos:
+% http://www.ctan.org/pkg/algorithmicx
+
+
+
+
+% *** ALIGNMENT PACKAGES ***
+%
+%\usepackage{array}
+% Frank Mittelbach's and David Carlisle's array.sty patches and improves
+% the standard LaTeX2e array and tabular environments to provide better
+% appearance and additional user controls. As the default LaTeX2e table
+% generation code is lacking to the point of almost being broken with
+% respect to the quality of the end results, all users are strongly
+% advised to use an enhanced (at the very least that provided by array.sty)
+% set of table tools. array.sty is already installed on most systems. The
+% latest version and documentation can be obtained at:
+% http://www.ctan.org/pkg/array
+
+
+% IEEEtran contains the IEEEeqnarray family of commands that can be used to
+% generate multiline equations as well as matrices, tables, etc., of high
+% quality.
+
+
+
+
+% *** SUBFIGURE PACKAGES ***
+\ifCLASSOPTIONcompsoc
+  \usepackage[caption=false,font=normalsize,labelfont=sf,textfont=sf]{subfig}
+\else
+  \usepackage[caption=false,font=footnotesize]{subfig}
+\fi
+% subfig.sty, written by Steven Douglas Cochran, is the modern replacement
+% for subfigure.sty, the latter of which is no longer maintained and is
+% incompatible with some LaTeX packages including fixltx2e. However,
+% subfig.sty requires and automatically loads Axel Sommerfeldt's caption.sty
+% which will override IEEEtran.cls' handling of captions and this will result
+% in non-IEEE style figure/table captions. To prevent this problem, be sure
+% and invoke subfig.sty's "caption=false" package option (available since
+% subfig.sty version 1.3, 2005/06/28) as this is will preserve IEEEtran.cls
+% handling of captions.
+% Note that the Computer Society format requires a larger sans serif font
+% than the serif footnote size font used in traditional IEEE formatting
+% and thus the need to invoke different subfig.sty package options depending
+% on whether compsoc mode has been enabled.
+%
+% The latest version and documentation of subfig.sty can be obtained at:
+% http://www.ctan.org/pkg/subfig
+
+
+
+
+% *** FLOAT PACKAGES ***
+%
+\usepackage{fixltx2e}
+% fixltx2e, the successor to the earlier fix2col.sty, was written by
+% Frank Mittelbach and David Carlisle. This package corrects a few problems
+% in the LaTeX2e kernel, the most notable of which is that in current
+% LaTeX2e releases, the ordering of single and double column floats is not
+% guaranteed to be preserved. Thus, an unpatched LaTeX2e can allow a
+% single column figure to be placed prior to an earlier double column
+% figure.
+% Be aware that LaTeX2e kernels dated 2015 and later have fixltx2e.sty's
+% corrections already built into the system in which case a warning will
+% be issued if an attempt is made to load fixltx2e.sty as it is no longer
+% needed.
+% The latest version and documentation can be found at:
+% http://www.ctan.org/pkg/fixltx2e
+
+
+% \usepackage{stfloats}
+% stfloats.sty was written by Sigitas Tolusis. This package gives LaTeX2e
+% the ability to do double column floats at the bottom of the page as well
+% as the top. (e.g., "\begin{figure*}[!b]" is not normally possible in
+% LaTeX2e). It also provides a command:
+% \fnbelowfloat
+% to enable the placement of footnotes below bottom floats (the standard
+% LaTeX2e kernel puts them above bottom floats). This is an invasive package
+% which rewrites many portions of the LaTeX2e float routines. It may not work
+% with other packages that modify the LaTeX2e float routines. The latest
+% version and documentation can be obtained at:
+% http://www.ctan.org/pkg/stfloats
+% Do not use the stfloats baselinefloat ability as the IEEE does not allow
+% \baselineskip to stretch. Authors submitting work to the IEEE should note
+% that the IEEE rarely uses double column equations and that authors should try
+% to avoid such use. Do not be tempted to use the cuted.sty or midfloat.sty
+% packages (also by Sigitas Tolusis) as the IEEE does not format its papers in
+% such ways.
+% Do not attempt to use stfloats with fixltx2e as they are incompatible.
+% Instead, use Morten Hogholm'a dblfloatfix which combines the features
+% of both fixltx2e and stfloats:
+%
+% \usepackage{dblfloatfix}
+% The latest version can be found at:
+% http://www.ctan.org/pkg/dblfloatfix
+
+
+
+
+% *** PDF, URL AND HYPERLINK PACKAGES ***
+%
+\usepackage{url}
+% url.sty was written by Donald Arseneau. It provides better support for
+% handling and breaking URLs. url.sty is already installed on most LaTeX
+% systems. The latest version and documentation can be obtained at:
+% http://www.ctan.org/pkg/url
+% Basically, \url{my_url_here}.
+
+
+
+
+% *** Do not adjust lengths that control margins, column widths, etc. ***
+% *** Do not use packages that alter fonts (such as pslatex).         ***
+% There should be no need to do such things with IEEEtran.cls V1.6 and later.
+% (Unless specifically asked to do so by the journal or conference you plan
+% to submit to, of course. )
+
+
+% correct bad hyphenation here
+\hyphenation{op-tical net-works semi-conduc-tor}
+
+
+\begin{document}
+%
+% paper title
+% Titles are generally capitalized except for words such as a, an, and, as,
+% at, but, by, for, in, nor, of, on, or, the, to and up, which are usually
+% not capitalized unless they are the first or last word of the title.
+% Linebreaks \\ can be used within to get better formatting as desired.
+% Do not put math or special symbols in the title.
+\title{Multi-Layer Perceptrons for Subvocal Recognition}
+
+
+% author names and affiliations
+% use a multiple column layout for up to three different
+% affiliations
+\author{
+\IEEEauthorblockN{Brian Coe}
+\IEEEauthorblockA{Omega Horizon Research\\
+Washington DC, USA\\
+Email: bwc126@gmail.com}
+}
+
+% conference papers do not typically use \thanks and this command
+% is locked out in conference mode. If really needed, such as for
+% the acknowledgment of grants, issue a \IEEEoverridecommandlockouts
+% after \documentclass
+
+% for over three affiliations, or if they all won't fit within the width
+% of the page, use this alternative format:
+%
+%\author{\IEEEauthorblockN{Michael Shell\IEEEauthorrefmark{1},
+%Homer Simpson\IEEEauthorrefmark{2},
+%James Kirk\IEEEauthorrefmark{3},
+%Montgomery Scott\IEEEauthorrefmark{3} and
+%Eldon Tyrell\IEEEauthorrefmark{4}}
+%\IEEEauthorblockA{\IEEEauthorrefmark{1}School of Electrical and Computer Engineering\\
+%Georgia Institute of Technology,
+%Atlanta, Georgia 30332--0250\\ Email: see http://www.michaelshell.org/contact.html}
+%\IEEEauthorblockA{\IEEEauthorrefmark{2}Twentieth Century Fox, Springfield, USA\\
+%Email: homer@thesimpsons.com}
+%\IEEEauthorblockA{\IEEEauthorrefmark{3}Starfleet Academy, San Francisco, California 96678-2391\\
+%Telephone: (800) 555--1212, Fax: (888) 555--1212}
+%\IEEEauthorblockA{\IEEEauthorrefmark{4}Tyrell Inc., 123 Replicant Street, Los Angeles, California 90210--4321}}
+
+
+
+
+% use for special paper notices
+%\IEEEspecialpapernotice{(Invited Paper)}
+
+
+
+
+% make the title area
+\maketitle
+
+% As a general rule, do not put math, special symbols or citations
+% in the abstract
+\begin{abstract}
+A multi-layer perceptron system is investigated for recognizing phonemes from EMG data. EMG data was recorded during full vocalization and subvocalization. Motor Unit Action Potentials were inferred from EMG data and their spectral energies used to train four articulatory feature extraction models based on MLPs. Outputs from the feature extraction networks were then fed forward through a final MLP to predict phonemes. Performance gains against a benchmark with no articulatory feature extraction and a single MLP only were demonstrated.
+\end{abstract}
+
+% no keywords
+
+
+
+
+% For peer review papers, you can put extra information on the cover
+% page as needed:
+% \ifCLASSOPTIONpeerreview
+% \begin{center} \bfseries EDICS Category: 3-BBND \end{center}
+% \fi
+%
+% For peerreview papers, this IEEEtran command inserts a page break and
+% creates the second title. It will be ignored for other modes.
+\IEEEpeerreviewmaketitle
+
+
+
+\section{Introduction}
+% no \IEEEPARstart
+Subvocal recognition (SVR) uses electromyographic (EMG) recordings from the muscles of speech to recognize spoken or sub-vocalized language. Electrodes are usually placed on the skin of the throat during speech or reading. During otherwise “silent” reading, EMG data can still contain enough information to decode what the user was reading to themselves. A common approach is to use EMG data from vocalization to train recognition systems for sub-vocal (silent) recognition. An early NASA project used a variety of approaches, but found high variance between speakers and for a single speaker on different days. High variability lead to accuracy ranging from 0.90 one day, down to 0.48 the next, for a single speaker. \cite{NASA} A later study by Carnegie Mellon University focused on developing feature extractors based on unique linguistic aspects of phonemes, called articulatory features (AFs). \cite{EARS} This later approach achieved F1 scores as high as 0.45 for some phonemes, with EMG data from multiple facial locations.
+
+%\hfill bwc
+
+\hfill July 15, 2017
+
+\subsection{Action Potentials and Articulatory Features}
+Specific muscular actions, like holding a body part in tension, requires neurons to “fire” in specific patterns. When neurons fire, the pattern of voltage discharge they produce is known as an action potential. When action potentials from motor neurons activate muscle, they are known as motor unit action potentials (MUAPs). \cite{EMG} By carefully deciphering MUAPs from EMG data, it may be possible to detect distinct signatures for the different kinds of AFs, and the values they can take on (in the case of “place”: dental, labial, alveolar, etc.). Detecting the common features of disparate phonemes in this way may help improve the accuracy of an SVR phoneme model when compared to using a less domain-specific approach that doesn't benefit from phoneme commonalities.
+
+Distinct MUAP's arise from different actions by different muscles in different locations. Therefore, the MUAP's spatial and temporal location, wave width, and intensity of the MUAP can all be used to help distinguish different motor activities in EMG data. Since distinct AF's require different patterns of muscle activity, they should require distinct MUAP's. Correlating specific MUAP's from EMG data to AF's should therefore help identify common and distinct features of phonemes, ultimately aiding in identifying the phonemes themselves.
+
+Previous work from Carnegie-Mellon also used AF's, but their approach was based on multiple EMG sources, AF extractors as Gaussian Mixture Models, the Short Time Fourier Transform, and forced phoneme-EMG alignment by using a signal channel and automatic auditory speech recognition. It should be noted their usage of AF's is based on a binary encoding scheme, with one classifier per unique label, and uses slightly different labels than the present study. This is intended to illustrate the relative simplicity of the present study. The data used herein was generated by the author using a raspberry pi computer with an 8-bit analog-to-digital converter (ADC), two monopolar surface electrodes as a single differential voltage measurement source, and no forced time alignment or audio signals.
+
+Data from EMG during full vocalization is often used in addition to sub-vocalization in training EMG-to-phoneme models. Full and sub-vocalization EMG signals vary mostly by absolute intensity, not morphology, given they arise from fine motor units. Higher vocal volume mostly corresponds to increased speech muscle contraction intensity, leading to MUAP's with higher amplitude, but a similar overall width and form to MUAP's from quieter vocalizations. Ideally, EMG signals from full and sub-vocalization are isomorphic to one another via a simple additive or multiplicative transform. Data from full vocalization should therefore have a higher signal-to-noise ratio on low resolution hardware in noisier environments, easing feature extraction and model training. In particular, between full and sub-vocalization, energy spectra should vary in absolute terms more than in relative terms among phonemes. Energy spectra differences between phonemes gleaned from full vocalization EMG data should therefore be useful in identifying sub-vocal EMG data as well.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=2.5in]{AP.eps}
+% where an .eps filename suffix will be assumed under latex,
+% and a .pdf suffix will be assumed for pdflatex; or what has been declared
+% via \DeclareGraphicsExtensions.
+\caption{Conceptual graph of individual neuron action potential.}
+\label{fig_ap}
+\end{figure}
+
+% Note that the IEEE typically puts floats only at the top, even when this
+% results in a large percentage of a column being occupied by floats.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=2.5in]{EMG.eps}
+% where an .eps filename suffix will be assumed under latex,
+% and a .pdf suffix will be assumed for pdflatex; or what has been declared
+% via \DeclareGraphicsExtensions.
+\caption{Superpositioning of individual MUAPs produces the complicated values of EMG data. \cite{daq}}
+\label{fig_emg}
+\end{figure}
+
+% \subsubsection{Full Vocalization as Foundation for Sub-vocalization}
+% Processes and methods developed while using full vocalization to identify phonemes in EMG data should transfer well to sub-vocalization scenarios. The two recording conditions differ mostly in the sensitivities required to distinguish phonemes, but general relative patterns among phonemes should hold. The models trained in this manner, using full vocalization, either can themselves be used when higher quality data becomes available, or the general process used to obtain these models can be improved upon and re-applied using improved recording equipment. The former case, use as-is seems unlikely given current results, as the models might not be able to take full advantage of the new equipment, while the latter case would constitute boot-strapping for future process improvements. In general, the lower spectral energies in sub-vocalization EMG data could still be distinguished in a live setting by a sufficiently well-trained model (one trained on full vocalization EMG data, for instance).
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=2.5in]{flow}
+% where an .eps filename suffix will be assumed under latex,
+% and a .pdf suffix will be assumed for pdflatex; or what has been declared
+% via \DeclareGraphicsExtensions.
+\caption{Sketch of intended solution flow. Continuous Wavelet Transform is done on EMG data, scaled, reduced, and normed. Benchmark and AFE models are trained. AFE outputs serve as inputs for the Solution Model.}
+\label{fig_flow}
+\end{figure}
+
+\subsection{Defining the Problem}
+Ahead, then, lies the challenge of developing an EMG-to-phoneme pipeline, with specialized feature extraction models to aid in identifying phonemes from processed EMG data. EMG data in its raw form is not particularly useful, but techniques like wavelet transformation can help accurately extract information about the energy spectrum of the non-stationary, non-sinusoid waves it records. Next, information about AF's is extracted from these energy spectra by models specialized for the purpose. Ultimately, a phoneme prediction model will use the extracted AF's and supplemental energy spectra data to identify the actual phonemes used to generate the data.
+
+Solving the problem will proceed by recording data, transforming it, training a benchmark model, training AF extractor models, and finally: training and optimizing a phoneme model. Recording the EMG data will be done using an ADC with a raspberry pi. Recorded EMG data will be visualized and statistically analyzed in attempting to determine the separability and salience of phonemes in the data. Transformed EMG data will undergo a similar analysis, to determine if employed transforms are appropriate for enhancing phoneme salience and separability. A benchmark model that predicts phonemes based on EMG without using any kind of AF's will be trained and optimized to set a performance goal for the AF extractors and phoneme model using them. Next comes training and optimization of the AF extractor (AFE) models themselves, using a grid search. Lastly, the EMG-phoneme model using AF's, the intended solution, will be trained and optimized by grid search.
+
+Ultimately, the intended solution consists of AFE models specialized to find AF's from processed EMG data, which feed their predictions into a phoneme prediction model. The phoneme prediction model uses predicted AF's alongside processed EMG data to detect phonemes in a given data segment. Ideally, this AF-enhanced phoneme model will outperform the benchmark model lacking AF extraction.
+
+\subsection{Metrics}
+Performance in this case is measured by F1 score. Sklearn, the framework used here, gives most estimators a built-in F1 scoring method accessible by score(), and this is the method used to compare results. F1 is suitable here because it equally weights precision and recall. Essentially, recall means getting true positives and avoiding false negatives while precision is avoiding false positives. In single phoneme detection, low precision and recall are about equally problematic. Since this isn't a clinical or critical use case, all “misses” are about equal. If or when this solution is rolled into a more general EMG-based speech recognition system, it will be the relative probabilities of phonemes that really matter. Recognition systems have some ability to compensate for low single recall or precision. Relative probability of phonemes should be relatively unaffected by low recall or precision, since the correct phoneme could still be in the top few most likely predictions for a single data window. A full speech recognition solution built with this system should be able to compensate for slightly mis-ordered phoneme probabilities by injecting contextual, a-priori information to improve single phoneme results.
+
+\section{Analysis}
+Data for SVR has been recorded by the author using a Raspberry Pi breakout board based on the PCF-8591 ADC. \cite{repo} Recordings were made in differential voltage mode on the 8-bit ADC using 2 monopolar electrodes attached approximately 4cm apart on the right pharyngeal region. Each word was recorded as a single file. Before recording, the word was entered as a file name with a series suffix. Upon pressing enter, recording began, full or sub-vocalization commenced, and when complete, the program and file recording terminated with ctrl-z. This process was repeated for each of about 148 words, three times in total. The first series was recorded during sub-vocalization only, while series 2 and 3 were recorded under full vocalization. A mixture of full and sub-vocalization were used in an attempt to improve model robustness. Each word was recorded as a single column-separated value (CSV) file.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=2.5in]{raw_emg.eps}
+% where an .eps filename suffix will be assumed under latex,
+% and a .pdf suffix will be assumed for pdflatex; or what has been declared
+% via \DeclareGraphicsExtensions.
+\caption{Graph of raw voltage data from first 100ms of data in absorbing series 2.}
+\label{fig_raw_emg}
+\end{figure}
+
+Words used for the EMG recordings were generated by random selection from a dictionary. Each word was decomposed into phonemes using natural language tool kit's cmudict, which has about 150k words as keys and a list of phonemes for each word as its values. Phonemes listed there follow IPA standards. Rasipuram was consulted for constructing AF vectors for each basic phoneme. \cite{Rasipuram} Below is a sampling of how words map to their phonemes, and how phonemes map to AF's, but complete lists for each, respectively, are available in appendix A and B.
+
+In total, the dataset used for the present results totals 444 files and runs for 350 seconds in duration. Size of the dataset, not including words, totals 9.0MB in csv format and 5.45 MB when loaded as DataFrames. Average file size and duration is therefore 20.3 KB and 0.788 seconds, respectively. Standard deviation for file memory use is 6.44 KB while the standard deviation for file duration is 0.244 seconds. Words used to generate the data, numbering 148, require about 1.4 KB of memory to store as a python list. On average, the words used are 6.07 letters long, 5.03 phonemes long, with standard deviations at 1.95 and 1.95, respectively. The average voltage recorded in the EMG data across all files is -0.339, with a standard deviation of 0.0493. For a closer look at EMG recording variability (specifically: in the second series), see the table.
+
+\subsection{Particularities}
+Raw EMG data is not in a particularly useful form for most purposes. To be useful, information about the MUAP's it records needs to be extracted and analyzed by some method. Often, the method used is the Fast Fourier Transform (FFT) or Short Fourier Transform (SFT). Another common method is the Wavelet Transform (WT) which uses the SFT to extract non-stationary waves from the data, but is more effective than SFT when a wavelet shape is chosen to closely match the waves of interest. Further considerations include whether to use surface electrodes or invasive needle electrodes. Surface electrodes often encounter interference from intervening tissue, in addition to interference along the sensor wires and from the recording environment. Variations in electrode placement and biological variability also effect data collection.
+
+For the present study, the ADC used yields relatively low voltage resolution, offering 8 bits. 8 bits means only 2 to the 8 or 256 different levels of voltage. Compounding this difficulty is the lack of a programmable gain amplifier (PGA) within the ADC, so only a portion of the 3.3 volt range can be used at any time, effectively limiting the number of resolved voltage levels to about 128. Taken together, this is about 512 times lower resolution than in other similar studies, and will be the first aspect to improve in future iterations upon this study. The sampling rate of 600Hz used here is quite close to standard, but signals well over 1kHz will be difficult to resolve. Fortunately, most MUAP's occur in the 10-50Hz range.
+
+In transforming words into phonemes, the cmudict offers variations of phonemes that lack specification of AF's in the other academic sources employed. When these less common varieties of phonemes are encountered, they are recast as the basic type ('A0', 'A1', 'A2', etc. all become simply 'A'). This ensures all phonemes will be treated as having the same AF's, and all phonemes used herein will have complete AF vectors built for them, even if this means introducing some systematic error. Distinguishing among more phoneme varieties and their unique AF's will present yet another direction for future improvement. Some words generated initially were also missing altogether from cmudict, so while there are files for 'direful' and 'wrathfu' in series 1, they were not used in the study and were not recorded for subsequent series. An oversight caused the file 'raspy-1' to be not recorded or missing, while this file is present in series 2 and 3 and those were used in the study.
+
+\subsection{Exploratory Visualization}
+Wavelet graphs are visualized in three dimensions: two spatial and one of color. Differing colors show positive and negative phases of wavelets, while the intensity of color denotes amplitude. The vertical axis shows wavelets of differing widths and the horizontal shows time. For a particular wavelet width (i.e., at any particular location along a horizontal line through the graph) the spectral energy carried by wavelets of that width can be found by summing the squares of the absolute value of the calculated wavelet amplitudes.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=2.5in]{WT_panel.eps}
+% where an .eps filename suffix will be assumed under latex,
+% and a .pdf suffix will be assumed for pdflatex; or what has been declared
+% via \DeclareGraphicsExtensions.
+\caption{Wavelet Transform graphs for three samples of three different words. Top to Bottom: Advice, Aspiring, Weather; Left to Right: Series 1, 2, 3. Each graph has time on the X, wavelet width on the Y, color denotes wave phase (purple +; green -), color intensity denotes amplitude.}
+\label{fig_WT}
+\end{figure}
+
+From the panels above, wavelet timing, width, and intensity can be seen to vary more between words than between samples for a particular word. Additionally, common motifs can be seen for phonemes present within different words. While phoneme-specific patterns can be seen, they can also be seen to have some significant variations in duration and intensity. These apparent wavelet patterns correlate closely to at least a subset, if not all, of the MUAP's responsible for generating the information of interest. As in the wavelets, MUAP's vary in width, location, and timing. Energy spectra obtained from these wavelet transforms should correlate closely to MUAP energies at different wavelengths and distinct times. By learning patterns in wavelet energy spectra, it may be possible to learn to distinguish MUAP's correlated to distinct actions. Actions of interest are those specific to and required to produce the various AF's and ultimately, phonemes. Wavelet energy spectra may therefore help distinguish phonemes by finding AF's that unite some while helping to distinguish others.
+
+\subsection{Algorithms and Techniques}
+Algorithms employed to distinguish phonemes in EMG data include the continuous wavelet transform (CWT), word phonetic lookup, AF vector construction, phoneme-based EMG windowing and spectral energy summation, feature scaling, norming and dimensionality reduction (principal component analysis, PCA), and finally, multi-layer perception classifiers with grid searching for optimal parameters. CWT used here has 50 discrete widths evenly spaced from 0.01 to 10 (corresponding to wavelet durations of approximately 20us and 20ms, respectively) and using the Ricker wavelet (“mexican hat wavelet”) within numpy's “cwt()” implementation. Words are split into phonemes with cmudict, dataframes of labels built with AF vectors using values from Rasipuram, and the number of windows for each EMG file is the number of phonemes in the word. Data from each file is segmented into a number of equal length windows. Amplitudes for each point within a window are grouped with others of the same width to find their total spectral energy for that window. In other words, after CWT, the 50-valued vectors for each datapoint within each window are condensed into a single 50-valued vector per window.  Window lengths vary depending on the file length and number of phonemes in the word, but each window has a single 50-valued total spectral energy vector. PCA is performed to reduce these 50 components per window to 10. Scaling to unit variance is done column-wise and normalization to unit vector length row-wise to help smooth the data and prevent neural net irregularities.
+
+Models employed include a unique MLPC for each AF vector column: manner, place, height, and vowel. Each AFE so trained takes processed EMG as input and yields an AF column as output. A benchmark MLPC uses processed EMG only as input and yields phonemes as outputs. A final model, the solution MLPC, takes processed EMG and AF's generated by the AF extractor models as inputs to predict phoneme outputs. Grid search is performed on each of these six (6) models, with exploratory parameters for layer sizes and alpha. Layer size parameters are explored from two (2) to nine (9) layers with one of either individual layer sizes: sixty (60) or ninety (90) for all layers. Alpha values are explored in the range [1e-4, 1000].
+
+Each algorithm employed is chosen for unique value it brings to the whole system. CWT extracts non-stationary waves from the data. By using a specific wavelet shape, CWT localizes transient waves in time by frequency and intensity. Using a wavelet well-matched to signal waves of interest, the original MUAP's producing the EMG, CWT can outperform FFT and SFT alone. CWT is also more resistant to Gaussian noise than FFT. Splitting words into phonemes using cmudict gives us a repeatable method of dividing words into smaller target units than whole words. Adding AF vectors to each phoneme enables finding commonalities between disparate sounds, improving the chances of detecting and distinguishing them. In effect, AF's are additional 'hooks' to tie EMG information to. Windowing the processed data reduces the large number of EMG datapoints to a number of rows equal to the number of phonemes in the file. Training an MLPC requires a 1-to-1 correspondence between input and output rows. Discretely separating files into equal, roughly phoneme-sized bins in this manner should also accentuate cumulative spectral energy differences between phonemes. Dimensionality reduction, scaling and normalization helps regularize features of interest and balances inputs as required for reliable artificial neural net (ANN) performance.  PCA helps increase signal-to-noise ratio by providing a few features capturing most of the variation of the originals, but in fewer features, making pattern-finding more likely. ANN's can easily become biased towards larger values if just a few inputs are an order of magnitude or so larger than the rest, hindering their performance, so scaling column-wise helps prevent this. Rows that have larger values will on average tend to activate ANN's more than rows with smaller values, so normalization to unit vector length row-wise helps ensure equal sample weighting.
+
+% Complex, conditional interplays of information are what ANN's excel at learning, making them potentially well suited to identifying the delicate and intricate actuations of fine motor signals. Given sufficient complexity, ANN's can reconstruct any other function. Relationships between EMG data and phonemes that produced them are noisy, conditional, and fuzzy—where ANN's can excel. Additionally, using ANN's has the advantage of vaguely emulating biological systems evolved for the same general purpose of linguistic decoding in human auditory neural circuits. Using grid search to refine our MLPC helps identify at least a local (if not global) optimum of model parameters. Not only will grid searching permutations of parameters usually result in superior results to the default model settings, but it also prevents more manual methods of tweaking parameters to improve the model.
+
+Each component of the preprocessing and learning model pipeline uses data in a specific fashion to fulfill its function. CWT is similar to FFT, but models data as the sum of transient rather than ongoing waves. Therefore, CWT attempts to decompose the parent voltage signal into discrete, overlapping wavelets. Results of this process include amplitude values for each discrete wavelet width for each input data point. Generating phonemes with NLTK's cmudict happens simply by passing a word as a key into the dictionary, returning a list of phonemes. Each phoneme is then passed into a dictionary, built using Rasipuram as a reference, to construct AF feature vectors for each phoneme. Windowing of transformed data is accomplished through summing up squares of absolute values of amplitude for each wavelet frequency for each data vector in the window. Indexes are calculated for each window based on the number of rows of data and the number of phonemes in the file. For a given file, windows are of a fixed size, but for a different file length and phoneme number, windows may be a different size (but all equal for that file). Summation happens column-wise within a window, yielding a single row of data per window with component number equal to that of the original data vectors. Each window therefore has a single total energy spectrum associated with it. Dimensionality reduction, scaling column-wise, and normalization row-wise are then performed on all data windows. Means and standard deviations are found for each column, then old values are replaced by subtracting the mean and dividing by the standard deviation for the column. Normalization involves treating each row as a vector, finding its vector length, and dividing each value in the row by its vector length. Obtained from this process are rows of unit vector length (a value of 1) with ratios preserved. Dimensionality reduction by PCA reduces input features from 50 to 10. Specifically, PCA reduces dimensions by finding dimensional ratios, in terms of existing dimensions, which maximize variance between data points in the set. Dimensional ratios so obtained are used as a transform to map the original, higher number of dimensions onto fewer dimensions capturing at least most of the variability happening on the higher ones.
+
+% Training an MLPC, like other ANN's, involves systematically tuning input weights for each neuron in the system to reduce the result of an error function. Using X as inputs, balanced 10-dimensional vectors in this case, and y as outputs, phonemes or phoneme vectors in this case, a simple error function is used to stepwise adjust weights. Programmatic derivation is used to find the direction of weight tuning that minimizes error between what outputs should be and what they are at a given iteration. Each layer undergoes tuning in a single round, and the process of error minimization is repeated iteratively until a maximum of iterations is reached or error converges to within a certain tolerance. Grid searching enables cross validation of multiple models simultaneously using all permutations of the passed parameters (the “parameter space”). Taking advantage of multiple core CPU's, a unique MLPC is created for each point in parameter space, trained on the data, and assessed in  performance on a distinct test set of data it wasn't trained on. Identical in principal to individual CV with a single model, grid search is simply a way of automating and parallelizing the process of finding optimal model parameters for a particular problem space.
+
+\subsection{Benchmark}
+% Benchmarks assist assessment of more novel or tenuous approaches. In this case,
+A phoneme prediction model using only processed EMG data and no AF's as inputs will serve as the benchmark. Illustrating how well an MLPC can extract phoneme-relevant information from processed EMG, it performs in the 0.11-0.12 F1 range depending on exact parameters. Using no AF's as inputs for the benchmark demonstrates a single ANN attempting to extract all relevant information from processed EMG on its own. It is expected to fail to find some key commonalities and differences in phonetic signals on its own. Nonetheless, it should (and has) found enough information about phonemes to perform better than chance. It is intended to represent a “blank slate” model that is missing key “injected” linguistic domain knowledge (AF's in the present study). Additionally, the benchmark should highlight the utility of specialized ANN's as feature extractors, preprocessing pipelines, etc., and underline the notion that ANN's are great when they specialize, but struggle with being generalist. To such end, the benchmark represents a less specialized and more naive approach to learning patterns and to neural nets in particular. Ideally, the benchmark will serve as an example of the value of including AF's and AF extractors in the final solution model.
+
+\section{Methodology}
+Several aforementioned algorithms are used prior to model training, as part of the preprocessing pipeline. First is the wavelet transform, taking raw EMG data and returning an equal number of vectors whose components are amplitudes for discrete wavelet widths. Wavelet transformation helps extract the transient wave signal corresponding to MUAP's which generated the signal during speech muscle contractions. Second is the process of generating phonemes from words and AF vectors from phonemes. NLTK library is used to split words, and AF vectors built for each phoneme by a custom dictionary (based on Rasipuram) and pandas DataFrame building function. Cmudict and the AF builder function are called once for each word. Third is the EMG windowing process, summing the energies of each wavelet width for a span of time in the EMG data. Instantaneous wavelet amplitudes are de-signed, squared and summed according to their width, yielding a single vector for each window with a number of components equal to the number of components in each wavelet-transformed EMG vector. Fourth, the input and output dataframes for AFE models are built, and sklearn's PCA, scale, and normalize methods are used, in that order. Once AFE models are trained and tested, their outputs (predicted AF's) for all data are numeralized, one hot encoded, and then combined with the processed EMG data to serve as input for the solution model. Row labels from the output dataframe used to train AFE's serve as the basis for building a target DataFrame for the phoneme model, as these are simply the phonemes which the solution model should learn to predict.
+
+\subsection{Addressing Particularities}
+Employing CWT helps compensate for the relatively low voltage resolution of the EMG instrument. Inferring information from relationships between voltage values reduces the sensitivity requirements of the individual values. CWT is particularly resistant to the effects of Gaussian noise, cross-talk from control and power lines, and other stationary waves. Windowing the results of CWT to find total energy spectra also helps compensate for low voltage and temporal resolution by integrating data over time. Ideally, integration over time will help accentuate cumulative energy differences between phonemes on the 10-100ms time scale phonemes are spoken over. During the file loading phase, try/except enables automatic ignoring of missing files. In building AF vectors, only the most common phoneme variants are used to obviate issues in building vectors for phonemes that aren't listed in the academic sources employed. Further facilitating this mapping of AF's to phonemes is the casting of phoneme variants from nltk's cmudict to their simplest variant. Systematic distortions of specific wavelet widths or during an interval of recording is at least partially overcome by the scaling and norming performed on the data. Scaling and normalization have the additional benefit of regularizing ANN training and smoothing EMG data, making convergence of error during training more likely.
+
+\subsection{Implementation}
+Algorithms, techniques and metrics have been tailored to the project with various specific helper methods. First, using the list of words used to generate EMG data, a dictionary is built with each word as a key, and raw EMG DataFrames from all series as values. Raw EMG DataFrames are loaded directly from the EMG CSV files. Next, another dictionary with words as keys is built with DataFrames of labels. Phonemes of each word serve as row labels for the label DataFrame, and the columns are AF categories. Vectors of AF's for each phoneme, named for the phoneme they encode, are placed into a DataFrame which becomes the value of each word in the label dictionary. Raw EMG DataFrames are processed and placed into a new dictionary containing each word as a key. Processing of raw EMG involves Wavelet Transformation and then windowing, resulting in an equal number of rows of processed EMG data and phoneme labels. Processed EMG windows from the processed EMG dictionary are then placed into a single master input DataFrame (“X”); phoneme-labeled AF vector frames are placed into a master output DataFrame (“y”).
+
+Stock AF extractor models are trained and then optimized using grid search. AF columns (4) are each used as labels to train a single MLPC with stock parameters, for a total of four (4) stock MLPC models. One AF dimension per AF extractor model. AFE models take only processed EMG as inputs, yielding a single AF column (“manner”, “place”, “height”, “vowel”). AFE models are then optimized with grid search, and their CV results compared to the CV results for the stock models to ensure relative improvement. For the benchmark model, cross validation uses only processed EMG data as input and phonemes as outputs. No AF data is used, as the benchmark acts as a “control” model for evaluating effectiveness of including AF-specific processing. In preparation for developing the solution model, the AFE model outputs are encoded and then combined with the processed EMG frames. Recall  AFE's (imperfectly) predict AF's from processed EMG. Since these outputs are categorical, they are transformed to a numerical order and then one hot encoded before being combined with processed EMG vectors to serve as input for the solution model. Generated AF's (from the AFE models) are the only ones used in training and test of the solution model. Solution phoneme model using predicted AF's as inputs is then cross-validated and optimized. A stock solution model's performance is compared to a grid searched version. Grid search parameters for the solution model is similar but slightly more expansive than that of the AFE grid search parameters, with more intermediate values of “alpha” and numbers of layers (but same layer sizes).
+
+% \subsection{Complications and Changes}
+% Some unique challenges arose in the project, requiring some significant changes to methodology. Using predictions from one model's output as another model's input complicated train/test splitting somewhat. AFE models generate inputs for the solution model, so AF's generated by them as output are added to the processed EMG DataFrame before train/test splitting for CV is performed. In effect, a new hybrid input frame of predicted AF's and processed EMG is created as an input to the train/test split, the other input is simply the phoneme labels. Phoneme labels will serve as an output target or label DataFrame during solution model training and testing.
+%
+% Early attempts to operationalize the pipeline involved FFT (specifically, numpy's rfft() method). FFT performs well when finding stationary waves lasting for the duration of the window passed to it. However, EMG signals are generated by MUAP's, which are non-stationary, transient waves with a more Gaussian, non-sinusoidal shape. Results from these trials indicated poor feature extraction, as parameter tuning did little to change results.
+%
+% Large files with multiple words and intervening silence were used initially. An autodetector scheme involving a model trained using binary labeled data (“no vocalization” and “with vocalization”) was used to help detect and automatically label phonemes sequentially within the EMG data. Usually these files were 10s or longer, with 3 repeats of a single sentence per file and approximately 2 seconds of silence separating each repeat. Naturally, this approach lead to quite imperfect labeling due to misalignment of EMG data and labels. Timing wasn't always consistent, and EMG noise made binary labeling difficult. In this arrangement, the autodetector could only be made about 0.90 accurate, even when using all available data to train it. Although 0.90 may seem acceptable, single errors in this arrangement had cumulative effects causing cumulative frame-shifting and cascade failure. Instead, a single word-per-file scheme allowed simplification of data labeling, resulting in significantly improved model accuracy. Single word-per-file made straightforward labeling possible, where one file is one word. Each file was split into a number of windows equal to the number of phonemes in the word, and each portion of the file assigned to the phoneme it should approximately contain. Ultimately, the single word-per-file approach increased the likelihood of data being labeled accurately.
+
+\section{Results}
+Several aspects of the final model should stand to reason, including the details of the grid search, the final model parameters, and the thoroughness of cross validation. Relevant details of the grid search in determining its exhaustiveness and appropriateness include the parameters searched and their values. As regards MLPC performance, the “alpha” and “layer sizes” parameters are usually the most significant. “Alpha” changes how finely the neurons discriminate between adjacent points when making classifications. Lower values of alpha lead to finer or steeper classification gradients, potentially leading to over-fitting, while higher values cause the network to make grosser distinctions, leading to bias. Searching through layer sizes used equal layers composed entirely of either 60 or 90 neurons in each layer, with layer sizes ranging from 2 to 9. It was found that 60 and 90 neurons per layer were close to the extinction of effects on score (negative and positive, respectively) for this particular setup, and likewise for the numbers of layers chosen. More possibilities exist in this grid search for adding layers than neurons within a layer, as adding a new layer is usually more effective than adding an equal number of neurons in a single layer for data with multiple levels (or convolutions) of information.
+
+Final model parameters include an alpha of 0.1, 7 layers of 90 neurons each, with all other values default. Alpha appears low enough to make sufficiently fine distinctions, without being so low as to encourage over-fitting. Layer sizes are large enough to find sufficient inferential supports, but not large enough to cause significant over-fitting. Further, there are enough layers to infer information about higher levels of the data, but not quite enough to be subject to significant variance in cross validation. Both parameters are near those found in other applications of MLPC's, and not particularly close to the limits of what the implementation can handle.
+
+In validating the final solution model, a train-test split was used with 0.15 of examples set aside for testing. Some variation was observed between training and test, with the model often performing better in testing than in training by 0.01-0.02 in terms of F1 score. A nearly identical train-test split setup was used with each of the AFE models, and the benchmark model, except using their respective inputs and labels. In sensitivity testing, systematic forcing was used both row-wise and column-wise in separate trials, and in yet another trial, white noise was added to some data. Test scores (in terms of F1) were found to be effected by ~0.005 for row-wise forcing, ~-0.02 for column-wise forcing (when done on principal component 0), and ~-0.07 for white noise addition. Modifying the solution model's parameters by adding or removing a layer, increasing or decreasing layer sizes by 0.30-0.50 was found to have an effect on F1 score in the 0.01-0.02 range. Increasing or decreasing alpha by an order of magnitude tends to have an effect in the range of minus 0.01-0.03.
+
+Reliability of the model's results, in the larger context of the speech recognition domain, are somewhat questionable. While the model does find some EMG similarities among phonemes and learns to recall and distinguish them at least in some cases, significant improvement would be necessary for trustworthiness. When the model does mislabel phonemes, it's most likely because it cannot distinguish the necessary features. As far as the model is concerned, those features it does find appear too similar to one another to make a meaningful distinction in most cases. In a real-world setting, the model would miss about 5/6ths (~0.85) of all individual phonemes vocalized or sub-vocalized to it. Notably, a speech model may be able to salvage this low individual phoneme performance somewhat, by using relative predicted probabilities instead of always going with the most likely one. A speech model would be able to enhance the accuracy of the system by using a-priori knowledge about how likely a phoneme is to follow another in a given context, effectively enabling re-ordering within the top few predicted phonemes from the solution model.
+
+Quantitatively, the solution candidate did perform better than the benchmark. The benchmark achieved an F1 score of about 0.116 in test while the solution achieved about 0.134. In detail, the benchmark achieved better scores in classes 'AA', 'EY', and 'S' than the benchmark, while the benchmark seemed to perform better with 'AH','IH', and 'L'. Considering 336 test samples and standard deviations in accuracy of 0.0801 for the benchmark and 0.0661 for the solution, the standard error for the achieved scores is +/-0.0000437 and +/-0.0000361. Comparing the scores and standard errors, with a benchmark score of 11.6+0.004 and solution score of 13.4-0.003, the results do appear statistically significant. An after-error difference of about 0.018 does appear to constitute a significant difference, illustrating that at least in this case, the addition of AFE preprocessor models for an EMG to phoneme prediction model was an effective improvement over the basic non-AF enhanced approach. Whether the solution model is significantly better than the benchmark and whether it's an effective solution within the general problem domain are distinct questions, however, and answering the latter affirmatively would doubtless require refinement within several stages of the process. Presently, however, the solution can be said to be a promising improvement over more naive approaches within the problem domain, and may offer a solid foundation for developing a form of artificial telepathy.
+
+\section{Conclusion}
+Above are visualized raw voltage graphs taken from EMG readings during vocalization. Originally time series data stored in csv format, it has been visualized as a line graph with the horizontal axis as time and the vertical axis as voltage reading. Crucially, the fairly low voltage resolution of the readings is apparent from the graph. Apparent are “pixelations” where discrete voltage levels can be seen, as only about 128 discrete levels are available from this particular setup. Despite the voltage resolution, some phonemic features appear to be visible in the raw data. Assuming that what we're seeing is a kind of phoneme correlation, they also appear to be variable in time, even for the same phoneme across different instances or words. In fact, consonants are often much shorter than vowels, and so it is expected words with more consonants would have more elongated, accentuated voltage graphs. Therefore, the timescale of variation would be expected to vary between phonemes or perhaps even between instances of the same phoneme, either within different words or for a given word during a different invocation. Using fixed windows, while convenient for training an MLPC, would be expected to lead to a loss of variation over the time frames involved with phoneme variability, leading to a loss of precision or feature resolution. If vowels are much longer than consonants, windows might end up including both or just part of a vowel, even ignoring the possibility of frame shift errors in labeling. Brief variations in spectral energy that might otherwise clearly signal a phoneme would be expected to be lost in the process of totaling energy for an entire window. Essentially, windows create big bins into which lots of small, subtle scintillations of energy are poured, making their resolution difficult or impossible. Distinguishing later which bit of energy came from which expected state proves more difficult the larger the window.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=2.5in]{v_plot_advice-2.eps}
+% where an .eps filename suffix will be assumed under latex,
+% and a .pdf suffix will be assumed for pdflatex; or what has been declared
+% via \DeclareGraphicsExtensions.
+\caption{Graph of raw voltage data from advice, series 2.}
+\label{fig_v1}
+\end{figure}
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=2.5in]{v_plot_advice-3.eps}
+% where an .eps filename suffix will be assumed under latex,
+% and a .pdf suffix will be assumed for pdflatex; or what has been declared
+% via \DeclareGraphicsExtensions.
+\caption{Graph of raw voltage data from advice, series 3.}
+\label{fig_v2}
+\end{figure}
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=2.5in]{v_plot_amuck-2.eps}
+% where an .eps filename suffix will be assumed under latex,
+% and a .pdf suffix will be assumed for pdflatex; or what has been declared
+% via \DeclareGraphicsExtensions.
+\caption{Graph of raw voltage data from amuck, series 2.}
+\label{fig_v3}
+\end{figure}
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=2.5in]{v_plot_aspiring-1.eps}
+% where an .eps filename suffix will be assumed under latex,
+% and a .pdf suffix will be assumed for pdflatex; or what has been declared
+% via \DeclareGraphicsExtensions.
+\caption{Graph of raw voltage data from aspiring, series 1.}
+\label{fig_v4}
+\end{figure}
+
+Observing the shortcomings of the energy window approach brings the focus back to why: making the data into a form usable by MLPC's. These types of neural nets usually excel at discrete classification problems, but struggle with time series and the kinds of variability that come with them. In discretizing time series data, two options present themselves: attempt to lump lots of individual time series data points together, or attempt to further atomize or sub-divide labels into smaller pieces. In this case, the latter would have meant trying to atomize phonemes, which has no obvious way to proceed. Without a statistical, probabilistic transition model for discrete phases within phonemes, splitting them up would be an exercise in arbitrary judgement.
+
+% Now, back to the visualization.
+Within the voltage graphs, some variation is apparent, but there appears a significant amount of randomness. Higher quality EMG readouts (those using at least two (2) bytes of precision, where only one (1) was used here) appear more varied and clearly delineated between action and inaction. While a few motifs seem consistent across samples and roughly correlate to specific phonemes, much of the apparent variation is likely noise and level-jumping due to low voltage resolution. Low voltage resolution increases the difficulty of distinguishing signal and noise. Higher voltage resolution would make the difference between speaking and not more apparent. More voltage levels would be available in a higher precision ADC. In the present case, by contrast, noise or transient fluctuations can overwhelm the signal due to low voltage resolution. For some files, brief periods in the beginning and end of the file should contain silence, while the middle should contain full or sub-vocalization. Visually, however, the two are often difficult to distinguish.
+
+From what motifs do consistently appear, those most likely corresponding to phonemes seem to vary widely in width or duration. Some of the recurrent motifs may be actual phoneme features. From those, it can be seen they have variation in duration. A single phoneme can vary in width between different samples of the same word. Additionally, it is expected that some phonemes be longer than others. Fixed energy windows struggle with probabilisticaly variable features. By compressing variations together, energy windows present some loss of reliable feature resolution. Subcomponents of phonemes that may otherwise be used as features to distinguish them are lost in the windowing method. Effectively, differing and variable phonemes feature widths are steamrolled together by the single window size employed for each unique instance of each word. As stated, no obvious way presents itself to label only portions of phonemes in time series data to facilitate MLPC usage specifically. While portions of phonemes in the EMG data have apparently distinct features, there is no obvious technique to temporally atomize phonemes into smaller pieces within a strictly MLPC framework. Another alternative would perhaps be to attempt assignment of distinct features within a phoneme to the same phoneme label, but this would likely lead to non-convergence of the MLPC, leading to inconsistent behavior at best.
+%
+% \subsection{Reflection}
+% In summary, an articulatory feature extraction pipeline was investigated for detecting phonemes present within single-differential EMG data. Beginning with recording the EMG, moving to analyzing the energy spectra, training AF prediction models, automatically labeling AF's within the processed data, training phoneme predictors, and ultimately yielding phoneme likelihoods for each data window. Recording the EMG data began with preparing the word list. Next, recording began by typing the word, pressing 'enter', full or sub-vocalization, and stopping the recording—repeated until all words have samples recorded. Analyzing energy spectra was accomplished with CWT upon each EMG file to help distinguish phonemes. Training AFE models to automatically label data and having them do so followed. Words were broken into phonemes, AF vectors were generated, and DataFrames of labels were built before using them along with processed EMG data to train the AFE models. A benchmark was developed using the processed EMG and phoneme labels only. Training the solution model required combining processed EMG with predicted AF's from the AFE models. Building the input and output DataFrames for this stage preceded train-test splitting, and then actual training.
+%
+% Both interesting and difficult was the task of recording good EMG data sets. EMG has been an active area of research for over 50 years. Hardware involved can range from a simple single-byte ADC to a battery of 100k+ equipment with arrays of specialized amplifiers and filers. EMG can be performed purely from the surface of the body with dermal electrodes, or with various invasive devices, usually based on conductive needles. Electrodes themselves can vary wildly in quality and be monopolar or multipolar. During recording, interference in the sensor lines and from the electrical environment can greatly impact results. Recording procedures themselves can vary from the atomic (say, single word-per-file, or simple actions) to the complex (compound actions, whole activities). With subvocalization in paritcular, an individual may be a “loud” sub-vocalizer one day, strongly activating the muscles of speech while remaining silent, while being much “quieter” the next. EMG presents particularities with preprocessing that pose an interesting challenge as well. While FFT is the simplest and usually the most common approach to extracting MUAP information, it only works well when activity is sustained for the full width of an observational window. Speech, on the other hand, is highly variable in duration and definitely transient, necessitating the use of a non-stationary wave extraction technique like CWT. Subsequently, careful selection of a base waveform and appropriate wavelet widths needs to be undertaken.
+%
+% Answering whether the solution is appropriate for general usage is multi-fold. Preprocessing used here for the solution pipeline is the best among the tried alternatives, and is either close to or at the  state of the art. Specifically, the software filtering of the EMG signal involving CWT, PCA, scaling, and normalization should constitute state of the art. However, using dedicated AF neural nets for EMG is a newer and less established approach. “Less established” could translate to “disruptive” if it can be made to work well with some other changes. Neural net-based extraction of articulatory features in automatic audio speech recognition is used by Google, for instance. Primarily, improved voltage and time resolution of the EMG measurement appears to be the main hurdle. Currently, the solution uses something like the equivalent of a 16x8 pixel monochrome video where pixels can only be on or off. It is difficult to imagine using such a data feed for effective automatic sign language recognition, but that's closely analogous to the situation in the present study. Luckily, these facts taken together mean the current solution should be near the lower end of the s-curve for model performance versus data quality. Performance could stand to improve several fold, and with much better data to use, the solution probably could be made to work well enough for general usage. To help compensate for the low individual phoneme accuracy, word and n-gram models could be applied as another layer of refinement. In such an arrangement, even a slight improvement to phoneme recognition (compared to where it is now, in this solution) would likely translate to an even larger impact on word or phrase accuracy. Word and n-gram models are by design meant to handle and improve upon low component-wise recognition. Realistically, however, wrapping the current solution in a word model would likely still prove too poor for general use. Generally, the approach used here with better data and a few other tweaks could probably be ready for prime time.
+
+\subsection{Improvement}
+Of all possible avenues of improvement, the most promising is via the estimator at the core of the solution. In lieu of an MLPC, a hierarchical hidden markov model (HHMM) would likely boost the performance of a sub-vocal recognition pipeline several fold. Using single words per file, with hierarchical states at the phoneme, word and phrase levels would likely present a superior improvement. At the word level, the number of states would be the number of phonemes in the word. On the phoneme level, the number of states would be experimentally determined in CV to get just the right number of states and their transition probabilities for each type of phoneme. On the n-gram and phrasal level, standard libraries could be used to build n-gram probabilities. Phoneme-level recognition could be further enhanced using neural nets as AF extractors in a preprocessing pipeline, after appropriate state numbers and transitions are determined experimentally in a process of bootstrapping.
+
+% All improvements mentioned, taken together, would probably improve the solution to a widely useful state.
+Using a 16 bit rather than 8 bit ADC, with at least 800Hz sampling rate, and a programmable amplifier would take resolvable voltage levels from 256 (128 or so in practice) to 65,536. In turn, MUAP detection sensitivity or precision should improve by at least an order of magnitude. CWT could be employed using a wave form more true to the underlying action potential of neurons. Currently, a Ricker wave is used, which is the second derivative of the Gaussian function, whereas neuronal action potentials are more asymmetric and abrupt in their shifts of value. EMG and transformation improvements alone would likely increase accuracy of an MLPC based approach like the one here by a few fold. Individual phoneme recognition would be improved through better wavelet extraction and higher fidelity signals. Ultimately, combining these with an HHMM approach, however, would likely greatly improve performance. Adaptation to variable feature scales and using priors to constrain predicted likelihoods by means of an HHMM would itself likely improve the flexibility of both AF and phoneme representation and extraction. Taken together, with improved measurement, transformation, and probabilistic modeling, a formidable improvement to the current solution seems possible and likely.
+
+% \subsubsection{Subsubsection Heading Here}
+% Subsubsection text here.
+
+
+% An example of a floating figure using the graphicx package.
+% Note that \label must occur AFTER (or within) \caption.
+% For figures, \caption should occur after the \includegraphics.
+% Note that IEEEtran v1.7 and later has special internal code that
+% is designed to preserve the operation of \label within \caption
+% even when the captionsoff option is in effect. However, because
+% of issues like this, it may be the safest practice to put all your
+% \label just after \caption rather than within \caption{}.
+%
+% Reminder: the "draftcls" or "draftclsnofoot", not "draft", class
+% option should be used if it is desired that the figures are to be
+% displayed while in draft mode.
+
+%
+
+
+
+
+
+
+
+
+
+% An example of a double column floating figure using two subfigures.
+% (The subfig.sty package must be loaded for this to work.)
+% The subfigure \label commands are set within each subfloat command,
+% and the \label for the overall figure must come after \caption.
+% \hfil is used as a separator to get equal spacing.
+% Watch out that the combined width of all the subfigures on a
+% line do not exceed the text width or a line break will occur.
+
+% \begin{figure*}[!t]
+% \centering
+% \subfloat[Case I]{\includegraphics[width=2.5in]{myfigure}%
+% \label{fig_first_case}}
+% \hfil
+% \subfloat[Case II]{\includegraphics[width=2.5in]{myfigure}%
+% \label{fig_second_case}}
+% \caption{Simulation results for the network.}
+% \label{fig_sim}
+% \end{figure*}
+
+% Note that often IEEE papers with subfigures do not employ subfigure
+% captions (using the optional argument to \subfloat[]), but instead will
+% reference/describe all of them (a), (b), etc., within the main caption.
+% Be aware that for subfig.sty to generate the (a), (b), etc., subfigure
+% labels, the optional argument to \subfloat must be present. If a
+% subcaption is not desired, just leave its contents blank,
+% e.g., \subfloat[].
+
+
+% An example of a floating table. Note that, for IEEE style tables, the
+% \caption command should come BEFORE the table and, given that table
+% captions serve much like titles, are usually capitalized except for words
+% such as a, an, and, as, at, but, by, for, in, nor, of, on, or, the, to
+% and up, which are usually not capitalized unless they are the first or
+% last word of the caption. Table text will default to \footnotesize as
+% the IEEE normally uses this smaller font for tables.
+% The \label must come after \caption as always.
+%
+%\begin{table}[!t]
+%% increase table row spacing, adjust to taste
+%\renewcommand{\arraystretch}{1.3}
+% if using array.sty, it might be a good idea to tweak the value of
+% \extrarowheight as needed to properly center the text within the cells
+%\caption{An Example of a Table}
+%\label{table_example}
+%\centering
+%% Some packages, such as MDW tools, offer better commands for making tables
+%% than the plain LaTeX2e tabular which is used here.
+%\begin{tabular}{|c||c|}
+%\hline
+%One & Two\\
+%\hline
+%Three & Four\\
+%\hline
+%\end{tabular}
+%\end{table}
+
+
+% Note that the IEEE does not put floats in the very first column
+% - or typically anywhere on the first page for that matter. Also,
+% in-text middle ("here") positioning is typically not used, but it
+% is allowed and encouraged for Computer Society conferences (but
+% not Computer Society journals). Most IEEE journals/conferences use
+% top floats exclusively.
+% Note that, LaTeX2e, unlike IEEE journals/conferences, places
+% footnotes above bottom floats. This can be corrected via the
+% \fnbelowfloat command of the stfloats package.
+
+
+
+
+% conference papers do not normally have an appendix
+
+
+% use section* for acknowledgment
+
+
+
+
+% trigger a \newpage just before the given reference
+% number - used to balance the columns on the last page
+% adjust value as needed - may need to be readjusted if
+% the document is modified later
+\IEEEtriggeratref{6}
+% The "triggered" command can be changed if desired:
+\IEEEtriggercmd{\enlargethispage{-1in}}
+
+% references section
+
+% can use a bibliography generated by BibTeX as a .bbl file
+% BibTeX documentation can be easily obtained at:
+% http://mirror.ctan.org/biblio/bibtex/contrib/doc/
+% The IEEEtran BibTeX style support page is at:
+% http://www.michaelshell.org/tex/ieeetran/bibtex/
+%\bibliographystyle{IEEEtran}
+% argument is your BibTeX string definitions and bibliography database(s)
+%\bibliography{IEEEabrv,../bib/paper}
+%
+% <OR> manually copy in the resultant .bbl file
+% set second argument of \begin to the number of references
+% (used to reserve space for the reference number labels box)
+\begin{thebibliography}{6}
+
+\bibitem{NASA}
+\emph{NASA}, Nasa.gov, 2004. [Online].\hskip 1em plus
+  0.5em minus 0.4em\relax Available at: \url{https://www.nasa.gov/centers/ames/news/releases/2004/04_18AR.html} [Accessed 18 Mar 2017].
+
+\bibitem{EARS}
+S. Jou and T. Schultz, \emph{EARS: Electromyographical Automatic Recognition of Speech.}, BIOSIGNALS, vol. 1, pp. 3-12, 2008. [Online].\hskip 1em plus
+  0.5em minus 0.4em\relax Available at: \url{http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.154.6348} [Accessed 18 Mar 2017].
+
+\bibitem{EMG}
+M. B. I. Reaz, M.S. Hussain and F. Mohd-Yasin, \emph{Techniques of EMG signal analysis: detection, processing, classification and applications.}, Biol. Proceed. Online vol. 8, pp. 11-35, 2006. [Online]. \hskip 1em plus
+  0.5em minus 0.4em\relax Available at: \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1455479} [Accessed 18 Jun. 2017].
+
+\bibitem{Rasipuram}
+R. Rasipuram and M. Magimai-Doss, \emph{Articulatory feature based continuous speech recognition using probalistic lexical modeling}, Comput. Speech Lang. 2015. [Online]. \hskip 1em plus
+  0.5em minus 0.4em\relax Available at: \url{http://dx.doi.org/10.1016/j.csl.2015.04.003} [Accessed 20 May 2017].
+
+\bibitem{repo}
+B. Coe, \emph{bwc126/MLND-Subvocal}, Github, 2017. [Online]. \hskip 1em plus
+  0.5em minus 0.4em\relax Available at: \url{https://github.com/bwc126/MLND-Subvocal} [Accessed 18 Mar. 2017].
+
+\bibitem{daq}
+Faculty.educ.ubc.ca, \emph{daq}, [Online]. \hskip 1em plus
+  0.5em minus 0.4em\relax Available at: \url{http://faculty.educ.ubc.ca/sanderson/EMG/Documents/daq.htm} [Accessed 20 Jun. 2017].
+
+
+\end{thebibliography}
+
+
+
+
+% that's all folks
+\end{document}
